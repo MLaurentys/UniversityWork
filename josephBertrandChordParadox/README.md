@@ -10,3 +10,19 @@ Method 1:
 <p align="center">
 <img src="https://github.com/MLaurentys/MAC0110/blob/master/josephBertrandChordParadox/images/Paradox1.png"/>
 </p>
+
+Method 2:
+      <p>
+      Choose a random point C in the circumference. Let O be the center of the circumference. Choose a random point P in the segment OC. The perpendicular AB of the side OC at the point P is the chord to be annalized. We know that the side of the inscribed triangle crosses the midpoint of the segment OC. Since AB must be between O and P to make it so the chord is longer than the side, we can affirm the odds of the chord being longer than the side of the triangle is 1/2. See image for visual explanation.
+      </p>
+<p align="center">
+<img src="https://github.com/MLaurentys/MAC0110/blob/master/josephBertrandChordParadox/images/Paradox2.png"/>
+</p>
+
+Method 3:
+<p>
+      Choose a random point P in the interior of the circumference with center O. Let AB be the chord with midpoint P. AB will be longer than the side of the triangle if P falls inside the circle with half of the radius of the original circunference. The odds of P falling in this area is equal to the reason of the inner aera and the outer area. Therefore, the probability of AB is longer than the side of the triangle is 1/4. See image for visual explanation.
+<p align="center">
+<img src="https://github.com/MLaurentys/MAC0110/blob/master/josephBertrandChordParadox/images/Paradox3.png"/>
+</p>
+      
