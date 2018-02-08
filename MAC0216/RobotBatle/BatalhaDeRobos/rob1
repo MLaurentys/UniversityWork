@@ -1,0 +1,138 @@
+# Robô que faz uma ronda de sua base atacando
+# qualquer inimigo que encontrar
+# se for 1 - ataque
+# mais que 1 - kamikaze
+
+def procuraEnemy(){
+	totalEnemies = 0;
+	y = checa(N).ocupado;
+	if(y == 1){
+		totalEnemies = 1;
+	}
+	
+	y = checa(NE).ocupado;
+	if(y == 1){
+		if(totalEnemies > 0){
+			totalEnemies = 7;
+		}
+		else{
+			totalEnemies = 2;
+		}
+	}
+	y = checa(SE).ocupado;
+	if(y == 1){
+		if(totalEnemies > 0){
+			totalEnemies = 7;
+		}
+		totalEnemies = 3;
+	}
+	y = checa(S).ocupado;
+	if(y == 1){
+		if(totalEnemies > 0){
+			totalEnemies = 7;
+		}
+		totalEnemies = 4;
+	}
+	y = checa(N).ocupado;
+	if(y == 1){
+		if(totalEnemies > 0){
+			totalEnemies = 7;
+		}
+		totalEnemies = 5;
+	}
+	y = checa(N).ocupado;
+	if(y == 1){
+		if(totalEnemies > 0){
+			totalEnemies = 7;
+		}
+		totalEnemies = 6;
+	}
+	return totalEnemies;
+}
+
+
+
+i = 0;
+esperaPosicionamento = 10;
+while(i < 5){
+	move(S);
+	while(resposta() == -1){
+		move(S);
+	}
+	esperaPosicionamento--;
+	i++;
+}
+move(SW);
+while(resposta() == -1){
+	move(SW);
+}
+esperaPosicionamento--;
+while(esperaPosicionamento > 0){
+	ver();
+	esperaPosicionamento--;
+}
+UP = 2;
+DOWN = 0;
+x = 5;
+temp = 2;
+while(x>0){
+	while(UP>0){
+		move(NE);
+		ver();
+		en = procuraEnemy();
+		if(en > 0){
+			UP = 0;
+			DOWN = 0;
+			x = 0;
+		}
+		move(NE);
+		ver();
+		en = procuraEnemy();
+		if(en > 0){
+			UP = 0;
+			DOWN = 0;
+			x = 0;
+		}
+		move(N);
+		ver();
+		en = procuraEnemy();
+		if(en > 0){
+			UP = 0;
+			DOWN = 0;
+			x = 0;
+		}
+		UP--;
+		DOWN++;
+	}
+	while(DOWN>0){
+		move(S);
+		ver();
+		en = procuraEnemy();
+		if(en > 0){
+			UP = 0;
+			DOWN = 0;
+			x = 0;
+		}
+		move(SW);		
+		ver();
+		en = procuraEnemy();
+		if(en > 0){
+			UP = 0;
+			DOWN = 0;
+			x = 0;
+		}
+		move(SW);
+		ver();
+		en = procuraEnemy();
+		if(en > 0){
+			UP = 0;
+			DOWN = 0;
+			x = 0;
+		}
+		DOWN--;
+		UP++;
+	}
+}
+while(x == 0){
+	kamikaze();
+}

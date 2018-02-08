@@ -1,0 +1,23 @@
+# Robô que dá uma voltinha e só tenta
+# atrapalhar os inimigos
+
+move(N);
+move(N);
+move(N);
+move(N);
+move(N);
+move(NE);
+while(true){
+	move(SE);
+	move(SE);
+	move(S);
+	move(SE);
+	move(SE);
+	move(N);
+	move(N);
+	move(NW);
+	move(NW);
+	move(N);
+	move(NW);
+	move(NW);
+}

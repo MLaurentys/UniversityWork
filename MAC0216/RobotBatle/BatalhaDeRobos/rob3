@@ -1,0 +1,49 @@
+# Robô que vai andando e explode
+# se encontrar mais que um inimigo
+
+def procuraEnemy(){
+	totalEnemies = 0;
+	y = checa(N).ocupado;
+	if(y > 4){
+		totalEnemies++;
+	}
+	
+	y = checa(NE).ocupado;
+	if(y > 4){
+		totalEnemies++;
+	}
+
+	y = checa(SE).ocupado;
+	if(y > 4){
+		totalEnemies++;
+	}
+	
+	y = checa(S).ocupado;
+	if(y > 4){
+		totalEnemies++;
+	}
+	
+	y = checa(SW).ocupado;
+	if(y > 4){
+		totalEnemies++;
+	}
+	
+	y = checa(NW).ocupado;
+	if(y > 4){
+		totalEnemies++;
+	}
+	
+	return totalEnemies;
+}
+
+while (true){
+	ver();
+	x = procuraEnemy();
+
+	if (x >= 2){
+		kamikaze();
+	}
+
+	move(SE);
+	move(SE);
+}

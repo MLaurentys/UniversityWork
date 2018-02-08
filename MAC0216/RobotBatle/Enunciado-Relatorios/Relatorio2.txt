@@ -1,0 +1,71 @@
+Integrantes do grupo:
+Larissa Sala			NºUSP: 9778731
+Matheus Laurentys		NºUSP: 9793714
+Nathalia Borin			NºUSP: 10297884
+
+Relatório - Fase 2
+
+TESTES
+
+O arquivo arena.c possui dois programas para testar as novas e antigas funcionalidades
+do robô. O programa sis testa as chamadas de sistema e a nova instrução ATR.
+Já o programa fat é uma adaptação do fatorial da primeira fase, agora utilizando
+operandos, para testar as demais instruções do robô.
+
+Para rodar os testes, basta rodar:
+
+./arena sis < testemap.txt para testar o sis
+./arena fat < testemap.txt para testar o fat
+
+OBS: Recomendamos mandar a saída para algum .txt, pois ela é extensa.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ADAPTAÇÕES DA MÁQUINA VIRTUAL:
+
+O robô agora possui novos atributos: id, posição, nº de cristais e time
+(ainda não está em uso).
+
+Os operandos não são mais inteiros e sim um par tipo, valor. Os
+tipos implementados são: NUM (para números), ACAO (para ações), VAR
+(para as direções, no momento), TILE (para as células) e TERRENO (auto-explicativo)
+
+As instruções agora checam o tipo dos operandos antes de serem executadas, assim
+como o tamanho da pilha antes de tentar desempilhar algo.
+
+Novas instruções:
+
+ATR: Checa o atributo do tile no topo da pilha (se houver), representado pelo argumento
+SYS: Chama o sistema para executar a última ACAO(mover, recolher, depositar, ver) empilhada. 
+Se houver um argumento do tipo VAR (direção), este deve ser empilhado antes da ação.
+
+Funções auxiliares para imprimir e criar operandos.
+Configurações de debug adicionais.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ARENA:
+
+A struct arena é composta por um tipo Mapa e um vetor de máquinas.
+O mapa é construído a partir de um .txt na função criaArena. O .txt é iniciado por um espaço
+(motivos de problemas com o getchar) e cada linha possui 4 inteiros que representam cada
+atributo de um tile (Terreno, Cristais, Ocupado e Base, respectivamente).
+As posições ocupadas (onde os robôs iniciam o jogo) são armazenadas num vetor.
+
+A função insereExército cria cada máquina do jogo, atribuindo-lhes um id e uma posição no mapa,
+assim como um programa (no momento o mesmo para todos os robôs).
+
+A função Atualiza é o nosso escalonador, que percorre o vetor de máquinas da arena e manda cada
+robô executar um número fixo de instruções (MAX_INSTR, no momento 50).
+
+A função Sistema é chamada de dentro da máquina (na instrução SYS) e é responsável por identificar
+e executar as chamadas do robô. Recebe como argumento o id do robô para poder acessar a pilha da
+máquina certa.
+As chamadas, por ora, são: MOV (move o robô), REC (recolhe um cristal), DEP (deposita um cristal)
+e VER (empilha todos os tiles vizinhos e no qual o robô se encontra).
+Se o robô conseguir executar a ação, o Sistema empilha um 0 em sua pilha de dados, caso contrário
+empilha um -1 (no caso de vizinhos fora da arena) ou 1 (demais erros).
+
+A função auxiliar Inicializa cria um tile com os atributos que recebe como argumentos.
+A função auxiliar imprime_arena imprime uma representação quadrada do estado atual da arena,
+usada para debug.
