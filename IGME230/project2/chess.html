@@ -7,13 +7,19 @@
             span.cell{
                 height:84px;
                 width:84px;
-                
+                color: blue;
+                font-size:50px;
+                text-align:center;
                 background-color: #ccc;
                 padding:0;
                 border:3px darkGray solid;
                 position:absolute;
             }
             
+            span.cell:hover{
+                border-color:red;
+            }
+
             /* Get rid of the cell border when it is selected */
             span.cellSelected{
                 height:25px;
@@ -49,9 +55,20 @@
         </style>
     </head>
     <body>
+        <h1>Let's play some chess?</h1>
+        <div id="timerWhite"></div>
+        <div id="timerBlack"></div>
+        <div id="log"></div>
         <div id="gridContainer"></div>
-        <script>
         
+        
+        
+        
+        
+        
+        <script>
+            let piecesBlack = ['bR','bN','bB','bQ','bK','bB','bN','bR','bP','bP','bP','bP','bP','bP','bP','bP']
+            let piecesWhite = ['wP','wP','wP','wP','wP','wP','wP','wP','wR','wN','wB','wQ','wK','wB','wN','wR']
             //--------------------------
             //-------Make_Board---------
             //--------------------------
@@ -78,6 +95,7 @@
                     let cell = span.cloneNode();
                     cell.style.left = `${col * (CELL_WIDTH + CELL_SPACING)}px`;
                     cell.style.top = `${row * (CELL_WIDTH + CELL_SPACING)}px`;
+                    cell.selected = false;
                     if((row + col) % 2 == 0){
                         cell.style.backgroundColor = "white";
                     } 
@@ -92,18 +110,51 @@
             //--------------------------
             //------Place_pieces--------
             //--------------------------
+            for(let i = 0; i < cells.length; i++){
+                for(let j = 0; j < cells[i].length; j++){
+                    if((8*i+j) < 16){
+                        //cells[i][j].piece = piecesBlack[i*8+j];
+                        placePiece(i,j,piecesBlack[i*8+j]);
+                        //placeImage(i,j);
+                    }
+                    else if((8*i+j) > 47){
+                        placePiece(i,j,piecesWhite[i*8+j - 48]);
+                    }
+                    else{
+                        cells.piece = null;
+                    }
+                }
+            }
+            
+            function placeImage(num1, num2){
+                cells[num1][num2].innerHTML = cells[num1][num2].piece;
+            }
+            
+            function placePiece(num1, num2, p){
+                cells[num1][num2].piece = p;
+                placeImage(num1,num2);
+            }
+            function removePiece(num1, num2){
+                cells[num1][num2].innerHTML = "";
+            }
             
             //--------------------------
-            //------Hover_Effect--------
+            //-------Move_Pieces--------
             //--------------------------
-            //6
-            let color = "red";
-            
             //7
-            container.onmouseover = fillCell;
-
+            container.onclick = selectCell;
+            let toPlay = 'w';
+            
+            let pieceGrabbed = null;
+            let grabRow = null;
+            let grabCol = null;
             //8
-            function fillCell(e){
+            
+            function canMove(num1,num2,num3,num4){
+                return false;
+            }
+            
+            function selectCell(e){
                 let rect = container.getBoundingClientRect();
                 let mouseX = e.clientX - rect.left;
                 let mouseY = e.clientY - rect.top;
@@ -111,15 +162,35 @@
                 let col = Math.floor(mouseX/columnWidth);
                 let row = Math.floor(mouseY/columnWidth);
                 let selectedCell = cells[row][col];
-                //selectedCell.className = 'cellSelected';
-                selectedCell.style.borderColor = color;
-                console.log(`${col}, ${row}`);
+                if(pieceGrabbed != null){
+                    if(canMove(grabRow,grabCol,row,col)){
+                    
+                    }
+                    else{
+                        cells[grabRow][grabCol].style.borderColor = "darkGray";
+                        cells[grabRow][grabCol].selected = false;
+                        pieceGrabbed = null;
+                        grabRow = null;
+                        grabCol = null;
+                    }
+                }
+                else{
+                    if(selectedCell.piece != null && selectedCell.piece[0] == toPlay){
+                        pieceGrabbed = selectedCell.piece;
+                        grabRow = row;
+                        grabCol = col;
+                        pieceGrabbed.selected = true;
+                        selectedCell.style.borderColor = "green";
+                    }
+                }
             }
             
-            //--------------------------
-            //-------Move_Pieces--------
-            //--------------------------
             
+            
+            //--------------------------
+            //------Updates_Clock-------
+            //--------------------------
+                        
             //--------------------------
             //-----Checks_"Check"-------
             //--------------------------
