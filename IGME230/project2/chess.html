@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Chess</title>
+        <style>
+            span.cell{
+                height:84px;
+                width:84px;
+                
+                background-color: #ccc;
+                padding:0;
+                border:3px darkGray solid;
+                position:absolute;
+            }
+            
+            /* Get rid of the cell border when it is selected */
+            span.cellSelected{
+                height:25px;
+                width:25px;
+                background-color: red;
+                padding:0;
+                margin:0;
+                position:absolute;
+            }
+            
+            #gridContainer{
+                top:100px;
+                left:5px;
+                padding:0;
+                display:inline-block;
+                position:absolute;
+            }
+            
+            #colorChooser{
+                position: absolute;
+                top: 65px;
+                left:800px;
+            }
+            
+            h1{
+                font-family: 'Press Start 2P', cursive;
+                display: inline-block;
+                position:absolute;
+                font-size:1.3em;
+                top: 0;
+                left:800px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="gridContainer"></div>
+        <script>
+        
+            //--------------------------
+            //-------Make_Board---------
+            //--------------------------
+            //1
+            const NUM_COLS = 8;
+            const NUM_ROWS = 8;
+            const CELL_WIDTH = 90;
+            const CELL_SPACING = 0;
+            
+            //2
+            const container = document.querySelector("#gridContainer");
+
+            //3
+            const span = document.createElement('span');
+            span.className = 'cell';
+
+            //4
+            const cells = [];
+            
+            //5
+            for(let row = 0; row < NUM_ROWS; row++){
+                cells.push([]);
+                for(let col=0;col<NUM_COLS;col++){
+                    let cell = span.cloneNode();
+                    cell.style.left = `${col * (CELL_WIDTH + CELL_SPACING)}px`;
+                    cell.style.top = `${row * (CELL_WIDTH + CELL_SPACING)}px`;
+                    if((row + col) % 2 == 0){
+                        cell.style.backgroundColor = "white";
+                    } 
+                    else{
+                        cell.style.backgroundColor = "black";
+                    }
+                    container.appendChild(cell);
+                    cells[row][col] = cell;
+                }
+            }
+            
+            //--------------------------
+            //------Place_pieces--------
+            //--------------------------
+            
+            //--------------------------
+            //------Hover_Effect--------
+            //--------------------------
+            //6
+            let color = "red";
+            
+            //7
+            container.onmouseover = fillCell;
+
+            //8
+            function fillCell(e){
+                let rect = container.getBoundingClientRect();
+                let mouseX = e.clientX - rect.left;
+                let mouseY = e.clientY - rect.top;
+                let columnWidth = CELL_WIDTH+CELL_SPACING;
+                let col = Math.floor(mouseX/columnWidth);
+                let row = Math.floor(mouseY/columnWidth);
+                let selectedCell = cells[row][col];
+                //selectedCell.className = 'cellSelected';
+                selectedCell.style.borderColor = color;
+                console.log(`${col}, ${row}`);
+            }
+            
+            //--------------------------
+            //-------Move_Pieces--------
+            //--------------------------
+            
+            //--------------------------
+            //-----Checks_"Check"-------
+            //--------------------------
+            
+            //--------------------------
+            //------Logs_The_Game-------
+            //--------------------------
+        </script>
+    </body>
+</html>
