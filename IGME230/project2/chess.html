@@ -155,47 +155,85 @@
             
             function canMove(num1,num2){
                 let retVal = false;
-                switch(pieceGrabbed[1]){
-                    case 'P':
-                        //move
-                        if(num2 - grabCol == 0){
-                            //regular move forward
-                            if(num1 - grabRow == -1){
-                                if(cells[grabRow-1][grabCol].piece == null){
-                                    retVal = true;
-                                }
-                            }
-                            //double forward move
-                            if(num1 - grabRow == -2){
-                                if(cells[grabRow-2][grabCol].piece == null){
-                                    if(grabRow == 6){
+                if(pieceGrabbed[0] == 'w'){
+                    switch(pieceGrabbed[1]){
+                        case 'P':
+                            //move
+                            if(num2 - grabCol == 0){
+                                //regular move forward
+                                if(num1 - grabRow == -1){
+                                    if(cells[grabRow-1][grabCol].piece == null){
                                         retVal = true;
                                     }
                                 }
+                                //double forward move
+                                if(num1 - grabRow == -2){
+                                    if(cells[grabRow-2][grabCol].piece == null){
+                                        if(grabRow == 6){
+                                            retVal = true;
+                                        }
+                                    }
+                                }
                             }
-                        }
-                        //capture
-                        else if(num2 - grabCol == 1 || num2 - grabCol == -1){
-                            //regular capture
-                            if(cells[grabRow][num2].piece != null){
-                                
+                            //capture
+                            else if(num2 - grabCol == 1 || num2 - grabCol == -1){
+                                //regular capture
+                                if(cells[grabRow][num2].piece != null){
+                                    
+                                }
+                                //capture en-passant
                             }
-                            //capture en-passant
-                        }
-                        
-                        
-                
+                            
+                            
+                    
+                    }
+                }
+                else{
+                    switch(pieceGrabbed[1]){
+                        case 'P':
+                            //move
+                            if(num2 - grabCol == 0){
+                                //regular move forward
+                                if(num1 - grabRow == 1){
+                                    if(cells[grabRow+1][grabCol].piece == null){
+                                        retVal = true;
+                                    }
+                                }
+                                //double forward move
+                                if(num1 - grabRow == 2){
+                                    if(cells[grabRow+2][grabCol].piece == null){
+                                        if(grabRow == 1){
+                                            retVal = true;
+                                        }
+                                    }
+                                }
+                            }
+                            //capture
+                            else if(num2 - grabCol == 1 || num2 - grabCol == -1){
+                                //regular capture
+                                if(cells[grabRow][num2].piece != null){
+                                    
+                                }
+                                //capture en-passant
+                            }
+                            
+                            
+                    
+                    }
                 }
                 return retVal;
             }
             function select(row,col){
                     tile = cells[row][col];
                     if((pieceGrabbed = tile.piece) != null && pieceGrabbed[0] == toPlay){
-                    grabRow = row;
-                    grabCol = col;
-                    pieceGrabbed.selected = true;
-                    tile.style.borderColor = "green";
-                }  
+                        grabRow = row;
+                        grabCol = col;
+                        pieceGrabbed.selected = true;
+                        tile.style.borderColor = "green";
+                    }
+                    else{
+                        pieceGrabbed = null;
+                    }
             }
 
             function deSelect(){
@@ -219,6 +257,8 @@
                         let aux = removePiece(grabRow, grabCol);
                         placePiece(row,col,aux);
                         deSelect();
+                        if(toPlay = 'w'){toPlay = 'b'}
+                        else if(toPlay = 'b'){toPlay = 'w'}
                     }
                     else{
                         deSelect();
