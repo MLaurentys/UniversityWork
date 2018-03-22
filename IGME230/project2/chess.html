@@ -19,7 +19,6 @@
             span.cell:hover{
                 border-color:red;
             }
-
             /* Get rid of the cell border when it is selected */
             span.cellSelected{
                 height:25px;
@@ -114,11 +113,9 @@
             
             //2
             const container = document.querySelector("#gridContainer");
-
             //3
             const span = document.createElement('span');
             span.className = 'cell';
-
             //4
             const cells = [];
             
@@ -224,7 +221,7 @@
                                 else{
                                 console.log("P" + boardCols[num2] + 8-(num1-1) + boardCols[num2] + 8-(num1+1));
                                     if(lastMove == ("P" + boardCols[num2] + (8-(num1-1)) + boardCols[num2] + (8-(num1+1)))){
-                                        removePiece(num2,num1+1);
+                                        removePiece(num1+1,num2);
                                         enPassant = true;
                                         retVal = true;
                                     }
@@ -258,17 +255,25 @@
                                     }
                                 }
                                 //capture en-passant
+                                else{
+                                console.log("P" + boardCols[num2] + 8-(num1-1) + boardCols[num2] + 8-(num1+1));
+                                    if(lastMove == ("P" + boardCols[num2] + (8-(num1+1)) + boardCols[num2] + (8-(num1-1)))){
+                                        removePiece(num1-1,num2);
+                                        enPassant = true;
+                                        retVal = true;
+                                    }
+                                }
                             }
                         }
                         break;
                     case 'B':
                         //check if diagonal
-                        if(Math.absolute(num1-grabRow) == Math.absolute(num2-grabCol)){
+                        if(Math.abs(num1-grabRow) == Math.abs(num2-grabCol)){
                             //checks if path is clean
-                            let rowDir = num1-grabRow/Math.absolute(num1-grabRow);
-                            let colDir = num2-grabCol/Math.absolute(num2-grabCol);
+                            let rowDir = (num1-grabRow)/Math.abs(num1-grabRow);
+                            let colDir = (num2-grabCol)/Math.abs(num2-grabCol);
                             let clean = true;
-                            for(let i = 1; i < Math.absolute(num1-grabRow); i++){
+                            for(let i = 1; i < Math.abs(num1-grabRow); i++){
                                 if(cells[grabRow + (i*rowDir)][grabCol + (i*colDir)].piece != null){
                                     clean = false;
                                 }
@@ -277,16 +282,58 @@
                                 //check if not alied piece on destination
                                 if(cells[num1][num2].piece != null){
                                     if(cells[num1][num2].piece[0] != pieceGrabbed[0]){
-                                        
+                                        retVal = true;
                                     }
                                 }
+                                else{
+                                    retVal = true;
+                                }
                             }
-                             
                         }
                         break;
                     case 'N':
                         break;
                     case 'R':
+                        //check if in line
+                        let clean = true;
+                        if((num1-grabRow == 0) && (num2-grabCol != 0)){
+                            let dir = (num2-grabCol)/Math.abs(num2-grabCol);
+                            //check if clean
+                            for(let i = 1; i < Math.abs(num2-grabCol); i++){
+                                if(cells[num1][grabCol+i*dir].piece != null){
+                                    clean = false;
+                                }
+                            }
+                            if(clean){
+                                if(cells[num1][num2].piece != null){
+                                    if(cells[num1][num2].piece[0] != pieceGrabbed[0]){
+                                        retVal = true;
+                                    }
+                                }
+                                else{
+                                    retVal = true;
+                                }
+                            }
+                        }
+                        else if((num2-grabCol == 0) && (num1-grabRow != 0)){
+                            let dir = (num1-grabRow)/Math.abs(num1-grabRow);
+                            //check if clean
+                            for(let i = 1; i < Math.abs(num2-grabCol); i++){
+                                if(cells[num1 + 1*dir][grabCol].piece != null){
+                                    clean = false;
+                                }
+                            }
+                            if(clean){
+                                if(cells[num1][num2].piece != null){
+                                    if(cells[num1][num2].piece[0] != pieceGrabbed[0]){
+                                        retVal = true;
+                                    }
+                                }
+                                else{
+                                    retVal = true;
+                                }
+                            }
+                        }
                         break;
                     case 'K':
                         break;
@@ -311,7 +358,6 @@
                         pieceGrabbed = null;
                     }
             }
-
             function deSelect(){
                 cells[grabRow][grabCol].style.borderColor = "darkGray";
                 grabRow = null; 
