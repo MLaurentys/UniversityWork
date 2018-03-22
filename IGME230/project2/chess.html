@@ -179,7 +179,7 @@
             //-------Move_Pieces--------
             //--------------------------
             let killed = false;
-            
+            let enPassant = false;
             //7
             container.onclick = selectCell;
             let toPlay = 'w';
@@ -222,7 +222,12 @@
                                 }
                                 //capture en-passant
                                 else{
-                                    if(lastMove == `P${boardCols[${num2}]}${num1-1}${boardCols[${num2}]}${num1+1}`){}
+                                console.log("P" + boardCols[num2] + 8-(num1-1) + boardCols[num2] + 8-(num1+1));
+                                    if(lastMove == ("P" + boardCols[num2] + (8-(num1-1)) + boardCols[num2] + (8-(num1+1)))){
+                                        removePiece(num2,num1+1);
+                                        enPassant = true;
+                                        retVal = true;
+                                    }
                                 }
                             }
                         }
@@ -257,6 +262,36 @@
                         }
                         break;
                     case 'B':
+                        //check if diagonal
+                        if(Math.absolute(num1-grabRow) == Math.absolute(num2-grabCol)){
+                            //checks if path is clean
+                            let rowDir = num1-grabRow/Math.absolute(num1-grabRow);
+                            let colDir = num2-grabCol/Math.absolute(num2-grabCol);
+                            let clean = true;
+                            for(let i = 1; i < Math.absolute(num1-grabRow); i++){
+                                if(cells[grabRow + (i*rowDir)][grabCol + (i*colDir)].piece != null){
+                                    clean = false;
+                                }
+                            }
+                            if(clean){
+                                //check if not alied piece on destination
+                                if(cells[num1][num2].piece != null){
+                                    if(cells[num1][num2].piece[0] != pieceGrabbed[0]){
+                                        
+                                    }
+                                }
+                            }
+                             
+                        }
+                        break;
+                    case 'N':
+                        break;
+                    case 'R':
+                        break;
+                    case 'K':
+                        break;
+                    case 'Q':
+                        break;
                 }
                 return retVal;
             }
@@ -284,6 +319,7 @@
                 pieceGrabbed.selected = false;
                 pieceGrabbed = null;
                 killed = false;
+                enPassant = false;
             }
             function selectCell(e){
                 let rect = container.getBoundingClientRect();
@@ -346,21 +382,23 @@
             //--------------------------
             let ol = document.querySelector("#log");
             let currLi;
-            let lastMove = null;
+            let lastMove = "";
             function makeLog(num1, num2){
+                lastMove = "";
                 if(toPlay == 'w'){
                     let li = document.createElement("LI");
                     currLi = li;
                     ol.appendChild(li);
                 }
-                currLi.innerHTML += cells[grabRow][grabCol].piece[1];
-                currLi.innerHTML += boardCols[grabCol];
-                currLi.innerHTML += grabRow;
-                if(killed){currLi.innerHTML += 'x'}
-                currLi.innerHTML += boardCols[num2];
-                currLi.innerHTML += num1;
+                lastMove += cells[grabRow][grabCol].piece[1];
+                lastMove += boardCols[grabCol];
+                lastMove += 8-grabRow;
+                if(killed){lastMove += 'x'}
+                lastMove += boardCols[num2];
+                lastMove += 8-num1;
+                if(enPassant){lastMove += '!'}
+                currLi.innerHTML += lastMove;
                 currLi.innerHTML += "  ";
-                lastMove = currLi.innerHTML;
             }
             
         </script>
