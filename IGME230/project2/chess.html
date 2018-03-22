@@ -44,6 +44,28 @@
                 left:800px;
             }
             
+            #wTimer{
+                font-size: 2em;
+                font-weight: bold;
+                padding:5px;
+                width:75px;
+                border: 3px solid black;
+            }
+            
+            #bTimer{
+                font-size: 2em;
+                font-weight: bold;
+                padding:5px;
+                width:75px;
+                border: 3px solid black;
+            }
+            
+            #log{
+                float:right;
+                font-size:3em;
+                margin-right:300px;
+            }
+            
             h1{
                 font-family: 'Press Start 2P', cursive;
                 display: inline-block;
@@ -56,9 +78,13 @@
     </head>
     <body>
         <h1>Let's play some chess?</h1>
-        <div id="timerWhite"></div>
-        <div id="timerBlack"></div>
-        <div id="log"></div>
+        <div id="wTimer">
+        <label id="wMinutes">00</label>:<label id="wSeconds">00</label>
+        </div>
+        <div id="bTimer">
+        <label id="bMinutes">00</label>:<label id="bSeconds">00</label>
+        </div>
+        <ol id="log"></ol>
         <div id="gridContainer"></div>
         
         
@@ -69,6 +95,14 @@
         <script>
             let piecesBlack = ['bR','bN','bB','bQ','bK','bB','bN','bR','bP','bP','bP','bP','bP','bP','bP','bP']
             let piecesWhite = ['wP','wP','wP','wP','wP','wP','wP','wP','wR','wN','wB','wQ','wK','wB','wN','wR']
+            let boardCols = ['a','b','c','d','e','f','g','h']
+            let totalSecWhite = 0;
+            let totalSecBlack = 0;
+            let bMin = document.querySelector("#bMinutes");
+            let bSec = document.querySelector("#bSeconds");
+            let wMin = document.querySelector("#wMinutes");
+            let wSec = document.querySelector("#wSeconds");
+            setInterval(updateTimer, 1000);
             //--------------------------
             //-------Make_Board---------
             //--------------------------
@@ -144,6 +178,8 @@
             //--------------------------
             //-------Move_Pieces--------
             //--------------------------
+            let killed = false;
+            
             //7
             container.onclick = selectCell;
             let toPlay = 'w';
@@ -155,9 +191,9 @@
             
             function canMove(num1,num2){
                 let retVal = false;
-                if(pieceGrabbed[0] == 'w'){
-                    switch(pieceGrabbed[1]){
-                        case 'P':
+                switch(pieceGrabbed[1]){
+                    case 'P':
+                        if(pieceGrabbed[0] == 'w'){
                             //move
                             if(num2 - grabCol == 0){
                                 //regular move forward
@@ -176,22 +212,21 @@
                                 }
                             }
                             //capture
-                            else if(num2 - grabCol == 1 || num2 - grabCol == -1){
+                            else if((num2 - grabCol == 1 || num2 - grabCol == -1) && (num1 - grabRow == -1)){
                                 //regular capture
-                                if(cells[grabRow][num2].piece != null){
-                                    
+                                if(cells[num1][num2].piece != null){
+                                    if(cells[num1][num2].piece[0] == 'b'){
+                                        killed = true;
+                                        retVal = true;
+                                    }
                                 }
                                 //capture en-passant
+                                else{
+                                    if(lastMove == `P${boardCols[${num2}]}${num1-1}${boardCols[${num2}]}${num1+1}`){}
+                                }
                             }
-                            
-                            
-                    
-                    }
-                }
-                else{
-                    switch(pieceGrabbed[1]){
-                        case 'P':
-                            //move
+                        }
+                        else{
                             if(num2 - grabCol == 0){
                                 //regular move forward
                                 if(num1 - grabRow == 1){
@@ -209,20 +244,26 @@
                                 }
                             }
                             //capture
-                            else if(num2 - grabCol == 1 || num2 - grabCol == -1){
+                            else if((num2 - grabCol == 1 || num2 - grabCol == -1) && (num1 - grabRow == 1)){
                                 //regular capture
-                                if(cells[grabRow][num2].piece != null){
-                                    
+                                if(cells[num1][num2].piece != null){
+                                    if(cells[num1][num2].piece[0] == 'w'){
+                                        killed = true;
+                                        retVal = true;
+                                    }
                                 }
                                 //capture en-passant
                             }
-                            
-                            
-                    
-                    }
+                        }
+                        break;
+                    case 'B':
                 }
                 return retVal;
             }
+                
+            
+                
+                
             function select(row,col){
                     tile = cells[row][col];
                     if((pieceGrabbed = tile.piece) != null && pieceGrabbed[0] == toPlay){
@@ -242,7 +283,7 @@
                 grabCol = null;
                 pieceGrabbed.selected = false;
                 pieceGrabbed = null;
-                    
+                killed = false;
             }
             function selectCell(e){
                 let rect = container.getBoundingClientRect();
@@ -254,11 +295,13 @@
                 let selectedCell = cells[row][col];
                 if(pieceGrabbed != null){
                     if(canMove(row,col)){
+                        makeLog(row, col);
                         let aux = removePiece(grabRow, grabCol);
                         placePiece(row,col,aux);
+                        if(toPlay == 'w'){toPlay = 'b';}
+                        else if(toPlay == 'b'){toPlay = 'w';}
                         deSelect();
-                        if(toPlay = 'w'){toPlay = 'b'}
-                        else if(toPlay = 'b'){toPlay = 'w'}
+                        
                     }
                     else{
                         deSelect();
@@ -274,7 +317,26 @@
             //--------------------------
             //------Updates_Clock-------
             //--------------------------
-                        
+            function pad(val) {
+              var valString = val + "";
+              if (valString.length < 2) {
+                return "0" + valString;
+              } else {
+                return valString;
+              }
+            }
+            function updateTimer(){
+                if(toPlay == 'w'){
+                    totalSecWhite++;
+                    wSec.innerHTML = pad(totalSecWhite%60);
+                    wMin.innerHTML = pad(parseInt(totalSecWhite/60));
+                }
+                else if(toPlay == 'b'){
+                    totalSecBlack++;
+                    bSec.innerHTML = pad(totalSecBlack%60);
+                    bMin.innerHTML = pad(parseInt(totalSecBlack/60));
+                }
+            }
             //--------------------------
             //-----Checks_"Check"-------
             //--------------------------
@@ -282,6 +344,25 @@
             //--------------------------
             //------Logs_The_Game-------
             //--------------------------
+            let ol = document.querySelector("#log");
+            let currLi;
+            let lastMove = null;
+            function makeLog(num1, num2){
+                if(toPlay == 'w'){
+                    let li = document.createElement("LI");
+                    currLi = li;
+                    ol.appendChild(li);
+                }
+                currLi.innerHTML += cells[grabRow][grabCol].piece[1];
+                currLi.innerHTML += boardCols[grabCol];
+                currLi.innerHTML += grabRow;
+                if(killed){currLi.innerHTML += 'x'}
+                currLi.innerHTML += boardCols[num2];
+                currLi.innerHTML += num1;
+                currLi.innerHTML += "  ";
+                lastMove = currLi.innerHTML;
+            }
+            
         </script>
     </body>
 </html>
