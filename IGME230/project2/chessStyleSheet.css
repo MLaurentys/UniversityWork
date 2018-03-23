@@ -40,6 +40,11 @@ span.cellSelected{
     position:absolute;
 }
 
+.piece{
+    height:70px;
+    padding:10px;
+}
+
 #colorChooser{
     position: absolute;
     top: 65px;
