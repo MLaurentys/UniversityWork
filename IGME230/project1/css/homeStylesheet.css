@@ -1,0 +1,144 @@
+body{
+    margin:0 !important;
+    padding:0 !important;
+    background-color:Black;
+}
+header{
+    margin:0;
+    padding:0;
+}
+h1{
+    margin:0;
+}
+.mainHeader {
+    color:Blue;
+    background-color: Green;
+    margin-bottom:2px;
+    margin-left: 5%;
+    height:220px;
+    width:90%;
+    position:fixed;
+    top:0;
+    margin-top:0;
+    padding-top: 0;
+}
+.mainHeader h1 {
+    text-align:center;
+    color:Red;
+    background-color:LightGray;
+    padding-top:1%;
+    padding-bottom:1%;
+    font-size:5em;
+}
+.mainHeader ul{
+    text-align:center;
+    font-size:2em;
+    
+}
+.mainHeader li{
+    display:inline;
+    list-style-type: none;
+}
+.mainHeader li a{
+    border:2pt solid black;
+    margin:3px;
+    padding:5px;
+    background-color:Red;
+}
+.overview{
+    background:Red;
+    margin-top:180px;
+    padding-bottom:120px;
+    padding-top:30px;
+    margin-left:15%;
+    margin-right:15%;
+}
+.themes{
+    margin:3%;
+    padding: 2%;
+    border:5px solid black;
+}
+.docs{
+    margin:3%;
+    padding: 2%;
+    
+}
+.exception1 {
+    font-size:250%;
+    
+}
+.exception1 ul li{
+    font-size:80%;
+}
+.exception1 ul li ul li{
+    font-size:70%;
+}
+footer{
+    position:fixed;
+    text-align:center;
+    bottom:0;
+    background-color: Green;
+    margin-left: 5%;
+    
+    width:90%;
+}
+#lastTheme{
+    margin:30px;
+    padding: 2%;
+    
+    border:5px solid black;
+
+}
+#currSelected{
+    color:Red;
+}
+.text{
+    margin-left:10px;
+    font-size:2.5em;
+    text-align:center;
+}
+#pageTitle{
+    width:100%;
+    text-align:center;
+    font-size:2.5em;
+    background-color:Green;
+    font-weight:bold;
+}
+#homePic{
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:LightGray;
+}
+
+/* Button */
+a:link, a:visited{
+    color: White;
+}
+a:hover{
+    color:DarkGray;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+# Robô que recolhe cristais e se 
+# explode se encotrar inimigos
+
+def defende(){
+	ver();
+	s = checa(S);
+	se = checa(SE);
+
+	if (s.cristais > 0){
+		recolhe(S);
+	}
+
+	if (sw.ocupado > 4){
+		ataca(SE);
+	}
+
+	if (sw.ocupado > 4){
+		if (s.ocupado > 4){
+			kamikaze();
+		}
+	}
+}
+
+x = resposta();
+while(x < 1){
+	move(S);
+	x = resposta();
+}
+
+while (true){
+	defende();
+}

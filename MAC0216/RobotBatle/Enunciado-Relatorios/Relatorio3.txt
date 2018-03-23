@@ -1,0 +1,94 @@
+Larissa Sala			NºUSP: 9778731
+Matheus Laurentys		NºUSP: 9793714
+Nathalia Borin			NºUSP: 10297884
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+RELATÓRIO - FASE 3
+
+O programa 'arena.c' agora se comunica com o programa 'apres' em Python. Isso
+significa que as ações dos robôs na arena podem ser visualizadas.
+
+As principais alterações em 'arena.c' foram:
+
+-	Foi determinado um padrão para o jogo: o tamanho da arena será sempre de uma matriz
+de 20x12; serão apenas dois times com 5 robôs em cada; e as bases estarão sempre
+em posições pré-determinadas ((1,0) e (18,11)), de lados opostos da Arena.
+
+-	As bases terão sempre terreno Estrada ao seu redor, porém o resto da Arena é gerado
+aleatoriamente. Terrenos mais difíceis de serem atravessados possuem chance menor de
+aparecerem.
+
+-	A quantidade de cristais em cada célula também é determinada de forma aleatória.
+
+-	Os robôs têm o atributo "cont"(contador) que administra a ocupação do robô: corresponde
+ao número de turnos que ele ficará sem ação. É usado para o custo (dificuldade) do terreno a
+ser atravessado, ou para turnos em que ele fica incapacitado de agir devido a ataques ou morte.
+
+-	Os robôs agora possuem vida (com um total padrão de 100). Se o robô perder toda sua vida,
+fica incapacitado por 5 turnos e depois volta a executar seu programa normalmente.
+
+-	Há uma nova chamada de sistema para Ataques: ATQ corresponde a um ataque normal, causando dano 
+de 50 de vida se houver um robô na direção especificada (mesmo se for do mesmo time); KMK é um ataque
+que mata o próprio robô e todos que estiverem ao seu redor; e JGC é um ataque que não causa dano, porém 
+corresponde ao lançamento de um cristal do robô para uma direção (o robô perde um de seus cristais,
+porém se outro robô for acertado por esse cristal, ele fica atordoado por 2 turnos e derruba todos 
+os seus cristais). 
+
+-	Foram adicionadas as condições de parada de jogo: uma base possuir um número x de
+cristais nela (nessa fase deixamos x = 1 por motivos de teste, porém na fase final isso será 
+alterado), ou o jogo exceder o número de turnos (no momento, 100 turnos) sem vitória de nenhum 
+dos times.
+
+-	Os programas de cada robô são lidos da entrada padrão pela função readProg, seguindo um padrão
+muito específico, como o do exemplo:
+	
+p0 -> Indica o início do programa
+{PUSH, {NUM, 0}},
+{END, {NUM, 0}},
+; -> Indica o fim do programa
+
+Nota: Por padrão, se a instrução não tiver argumento, usamos {NUM, 0}
+
+As principais implementações feitas em 'apres' foram:
+
+-	Os hexágonos da arena foram rotacionados para se adaptar ao nosso programa 'arena.c',
+em que os hexágonos se encontram "deitados" e seus vizinhos estão a Norte, Nordeste,
+Sudeste, Sul, Sudoeste e Noroeste.
+
+-	As texturas correspondem ao tipo de terreno daquela célula (Grama, Estrada, Montanha,
+Água, Areia ou Base).
+
+-	É possível visualizar cristais nas células, desaparecendo se forem recolhidos.
+
+-	Foi adicionada uma pequena interface na parte inferior da arena para informar ao usuário
+a quantidade de cristais e vida de cada robô, assim como a quantidade de cristais em cada base.
+Isso facilita o entendimento do que está acontecendo no jogo.
+
+Quanto aos testes, criamos 5 exemplos de programas, um para cada robô do time, que em conjunto
+testam todas as funções implementadas até agora
+
+-	Traveler: Um robô que apenas anda na direção da base inimiga
+
+-	Aggresive: Um robô que anda na direção da base inimiga e ataca quem estiver no caminho
+
+-	Exploding: Um robô que anda até perto do centro da tela e se explode
+
+-	Mathematician: Um robô que só anda na direção da base inimiga quando termina de calcular
+o fatorial de 5
+
+-	Smart: Um robô que caminha na direção da base inimiga, recolhe cristais, joga cristais
+quando encontra um inimigo e deposita cristais se chegar na base.
+
+Esses programas estão agrupados no arquivo progsteste.txt.
+Para rodar os testes, portanto, basta rodar:
+
+./arena < progsteste.txt
+
+Além da representação visual dos acontecimentos, o arena.c em modo debug também imprime um
+log dos acontecimentos na saída padrão.
+
+Problemas: No momento, ao rodarmos o arena, ele termina sua execução quase de imediato e o
+apres apenas mostra os acontecimentos depois. Não há uma comunicação em tempo real entre os
+programas, portanto se o jogador quisesse eventualmente mudar o programa de algum dos robôs
+durante o jogo, isso não seria possível (pois o jogo já acabou). 

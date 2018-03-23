@@ -1,0 +1,37 @@
+# Robô que vai avançando, ataca todos no caminh
+# e tenta destruir a base inimiga
+
+while (true){
+	ver();
+	n = checa(N);
+	nw = checa(NW);
+	ataca(N);
+	while(resposta() == 1){
+		ataca(N);
+	}
+
+	ataca(NW);
+	while(resposta() == 1){
+		ataca(NE);
+	}
+
+	while(n.cristais > 0){
+		recolhe(N);
+	}
+
+	while(nw.cristais > 0){
+		recolhe(NW);
+	}
+
+	move(NW);
+	move(NW);
+	move(S);
+
+	while(nw.base > 0){
+		deposita(NW);
+	}
+
+	while (n.base > 0){
+		deposita(N);
+	}
+}

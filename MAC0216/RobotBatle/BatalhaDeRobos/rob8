@@ -1,0 +1,95 @@
+# Faz um cerco em torno da base
+# e joga cristais em quem aparecer
+
+def movePattern(x){
+	if (x == 0){
+		move(NW);
+		return 0;
+	}
+
+	if (x == 1){
+		move(SW);
+		return 0;
+	}
+
+	if (x == 2){
+		move(SW);
+		return 0;
+	}
+
+	if (x == 3){
+		move(S);
+		return 0;
+	}
+
+	if (x == 4){
+		move(N);
+		return 0;
+	}
+
+	if (x == 5){
+		move(NE);
+		return 0;
+	}
+
+	if (x == 6){
+		move(NE);
+		return 0;
+	}
+
+	if (x == 7){
+		move(SE);
+		return -1;
+	}
+}
+
+def joga_onde_der(){
+	ver();
+
+	a = checa(N);
+	b = checa(NW);
+	c = checa(NE);
+	d = checa(S);
+	e = checa(SW);
+	f = checa(SE);
+
+	if (a.ocupado <= 4){
+		joga_cristal(N);
+	}
+
+	if (b.ocupado <= 4){
+		joga_cristal(NW);
+	}
+
+	if (c.ocupado <= 4){
+		joga_cristal(NE);
+	}
+
+	if (d.ocupado <= 4){
+		joga_cristal(S);
+	}
+	
+	if (e.ocupado <= 4){
+		joga_cristal(SW);
+	}
+
+	if (f.ocupado <= 4){
+		joga_cristal(SE);
+	}
+
+	return;
+}
+
+a = 0;
+while (true){
+	b = movePattern(a);
+	if (resposta() != -1){
+		a++;
+	}
+
+	if (a > 7){
+		a = 0;
+	}
+
+	joga_onde_der();
+}

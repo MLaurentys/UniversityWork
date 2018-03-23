@@ -1,0 +1,27 @@
+
+Larissa Sala			NºUSP: 9778731
+Matheus Laurentys		NºUSP: 9793714
+Nathalia Borin			NºUSP: 10297884
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+RELATÓRIO - FASE 4
+
+Nesta fase pudemos concluir a linguagem de alto nível para os robôs. Para isso,
+inicialmente, adaptamos as máquinas adicionando os comandos LEAVE e ENTRY.
+
+Já usando Flex e Bison, implementamos os comandos de "for", "else" e as chamadas de
+sistema para que o robô possa se movimentar, atacar, recuperar e depositar cristais,
+além de ver células vizinhas e seus atributos. (mais informações sobre a linguagem no README)
+
+Conectamos então o programa principal (arena.c) com o compilador, para que pudéssemos
+ler arquivos de texto com os códigos de cada robô. Para isso, basta que esses arquivos
+estejam na mesma pasta que "arena.c", e tenham nomes "rob0", "rob1", ... , "rob9" para
+alimentar os robôs de ID 0 a 9, respectivamente.
+
+Com relação à parte gráfica, criamos um log na parte direita da tela para facilitar
+a compreensão das ações que ocorrem no decorrer do jogo. Além disso, adicionamos uma
+tela de final de jogo.
+
+Por fim, foram definidas as configurações finais do jogo: 250 turnos, 25 instruções por turno
+e o jogo termina quando forem depositados 5 cristais em alguma das bases.

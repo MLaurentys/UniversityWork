@@ -1,0 +1,78 @@
+span.cell{
+    height:84px;
+    width:84px;
+    color: blue;
+    font-size:50px;
+    text-align:center;
+    background-color: #ccc;
+    padding:0;
+    border:3px darkGray solid;
+    position:absolute;
+}
+
+#backgroundImage{
+    width:100%;
+    height:100%;
+    position:absolute;
+}
+body{
+    background:backgroundImage;
+    
+}
+span.cell:hover{
+    border-color:red;
+}
+/* Get rid of the cell border when it is selected */
+span.cellSelected{
+    height:25px;
+    width:25px;
+    background-color: red;
+    padding:0;
+    margin:0;
+    position:absolute;
+}
+
+#gridContainer{
+    top:100px;
+    left:5px;
+    padding:0;
+    display:inline-block;
+    position:absolute;
+}
+
+#colorChooser{
+    position: absolute;
+    top: 65px;
+    left:800px;
+}
+
+#wTimer{
+    font-size: 2em;
+    font-weight: bold;
+    padding:5px;
+    width:75px;
+    border: 3px solid black;
+}
+
+#bTimer{
+    font-size: 2em;
+    font-weight: bold;
+    padding:5px;
+    width:75px;
+    border: 3px solid black;
+}
+
+#log{
+    float:right;
+    font-size:3em;
+    margin-right:300px;
+}
+
+h1{
+    font-family: 'Press Start 2P', cursive;
+    display: inline-block;
+    position:absolute;
+    font-size:3em;
+    top: 0;
+    text-align:center;
+}

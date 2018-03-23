@@ -1,0 +1,37 @@
+# Robô que vai avançando e tenta destruir
+# a base inimiga
+
+while (true){
+	ver();
+	s = checa(S);
+	se = checa(SE);
+	ataca(S);
+	while(resposta() == 1){
+		ataca(S);
+	}
+
+	ataca(SE);
+	while(resposta() == 1){
+		ataca(SE);
+	}
+
+	while(s.cristais > 0){
+		recolhe(S);
+	}
+
+	while(se.cristais > 0){
+		recolhe(SE);
+	}
+
+	move(S);
+	move(S);
+	move(NE);
+
+	while(se.base > 0){
+		deposita(SE);
+	}
+
+	while (s.base > 0){
+		deposita(S);
+	}
+}
