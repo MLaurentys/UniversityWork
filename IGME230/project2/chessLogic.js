@@ -3,8 +3,10 @@ let piecesWhite = ['wP','wP','wP','wP','wP','wP','wP','wP','wR','wN','wB','wQ','
 let boardCols = ['a','b','c','d','e','f','g','h']
 let totalSecWhite = 0;
 let totalSecBlack = 0;
+let btimer = document.querySelector("#bTimer");
 let bMin = document.querySelector("#bMinutes");
 let bSec = document.querySelector("#bSeconds");
+let wtimer = document.querySelector("#wTimer");
 let wMin = document.querySelector("#wMinutes");
 let wSec = document.querySelector("#wSeconds");
 setInterval(updateTimer, 1000);
@@ -242,11 +244,18 @@ function canMove(num1,num2){
             }
             break;
         case 'N':
-            if(cells[num1][num2].piece != null){
-                if(cells[num1][num2].piece[0] != pieceGrabbed[0]){
+            if((Math.abs(num1 - grabRow) == 2 && Math.abs(num2-grabCol) == 1) || (Math.abs(num1 - grabRow) == 1 && Math.abs(num2-grabCol) == 2)){
+                if(cells[num1][num2].piece != null){
+                    if(cells[num1][num2].piece[0] != pieceGrabbed[0]){
+                        retVal = true;
+                    }
+                }
+                else{
                     retVal = true;
                 }
             }
+            
+
             break;
         case 'R':
             //check if in line
@@ -425,6 +434,11 @@ function selectCell(e){
 //--------------------------
 //------Updates_Clock-------
 //--------------------------
+
+wtimer.style.marginTop=boardTop + 5*CELL_WIDTH + "px";
+wtimer.style.marginLeft=boardLeft + 8*CELL_WIDTH + "px";
+btimer.style.marginTop=boardTop + 2*CELL_WIDTH - 15 + "px";
+btimer.style.marginLeft=boardLeft + 8*CELL_WIDTH + "px";
 function pad(val) {
   var valString = val + "";
   if (valString.length < 2) {
@@ -452,7 +466,7 @@ function updateTimer(){
 //--------------------------
 //------Logs_The_Game-------
 //--------------------------
-let ol = document.querySelector("#log");
+let ol = document.querySelector("#log ol");
 let currLi;
 let lastMove = "";
 function makeLog(num1, num2){

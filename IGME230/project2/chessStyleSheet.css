@@ -61,27 +61,36 @@ span.cellSelected{
 }
 
 #wTimer{
-    font-size: 2em;
+    font-size: 3em;
     font-weight: bold;
     padding:5px;
-    width:75px;
-    border: 3px solid black;
+    width:auto;
+    border: 7px solid black;
+    position: absolute;
 }
 
 #bTimer{
-    font-size: 2em;
+    font-size: 3em;
     font-weight: bold;
     padding:5px;
-    width:75px;
-    border: 3px solid black;
+    width:auto;
+    border: 7px solid black;
+    position:absolute;
 }
 
 #log{
+    padding-top:5px;
+    padding-bottom:5px;
+    display:inline-block;
     float:right;
     font-size:3em;
-    margin-right:300px;
+    margin-right:50px;
+    width:20%;
+    background-color:#cdaa67;
 }
-
+#log ol{
+        margin-left:30px;
+}
 h1{
     font-family: 'Press Start 2P', cursive;
     display: inline-block;
