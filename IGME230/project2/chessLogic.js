@@ -12,6 +12,7 @@ setInterval(updateTimer, 1000);
 //-------Make_Board---------
 //--------------------------
 //1
+"use strict"
 const NUM_COLS = 8;
 const NUM_ROWS = 8;
 const CELL_WIDTH = 90;
@@ -24,17 +25,18 @@ const span = document.createElement('span');
 span.className = 'cell';
 //4
 const cells = [];
-
+let boardTop = Number(window.getComputedStyle(container, null).getPropertyValue("margin-top").split("px")[0]);
+let boardLeft = Number(window.getComputedStyle(container, null).getPropertyValue("margin-left").split("px")[0]);
 //5
 for(let row = 0; row < NUM_ROWS; row++){
     cells.push([]);
     for(let col=0;col<NUM_COLS;col++){
         let cell = span.cloneNode();
-        cell.style.left = `${col * (CELL_WIDTH + CELL_SPACING)}px`;
-        cell.style.top = `${row * (CELL_WIDTH + CELL_SPACING)}px`;
+        cell.style.left = boardLeft + col * (CELL_WIDTH + CELL_SPACING) + "px";
+        cell.style.top = boardTop + row * (CELL_WIDTH + CELL_SPACING) + "px";
         cell.selected = false;
         if((row + col) % 2 == 0){
-            cell.style.backgroundColor = "white";
+            cell.style.backgroundColor = "lightgray";
         } 
         else{
             cell.style.backgroundColor = "black";
@@ -42,6 +44,8 @@ for(let row = 0; row < NUM_ROWS; row++){
         container.appendChild(cell);
         cells[row][col] = cell;
     }
+    container.style.width = 8*CELL_WIDTH;
+    container.style.height = 8*CELL_WIDTH;
 }
 
 //--------------------------
@@ -64,7 +68,47 @@ for(let i = 0; i < cells.length; i++){
 }
 
 function placeImage(num1, num2){
-    cells[num1][num2].innerHTML = cells[num1][num2].piece;
+    switch(cells[num1][num2].piece){
+        case "wR":
+            cells[num1][num2].innerHTML = "<img class=\"piece\" src=\"pieces/wR.jpeg\" alt=\"White Rook\" >";
+            break;
+        case "wB":
+            cells[num1][num2].innerHTML = "<img class=\"piece\" src=\"pieces/wB.jpeg\" alt=\"White Bishop\" >";
+            break;
+        case "wN":
+            cells[num1][num2].innerHTML = "<img class=\"piece\" src=\"pieces/wN.jpeg\" alt=\"White Knight\" >";
+            break;
+        case "wK":
+            cells[num1][num2].innerHTML = "<img class=\"piece\" src=\"pieces/wK.jpeg\" alt=\"White King\" >";
+            break;
+        case "wQ":
+            cells[num1][num2].innerHTML = "<img class=\"piece\" src=\"pieces/wQ.jpeg\" alt=\"White Queen\" >";
+            break;
+        case "wP":
+            cells[num1][num2].innerHTML = "<img class=\"piece\" src=\"pieces/wP.jpeg\" alt=\"White Pawn\" >";
+            break;
+        case "bR":
+            cells[num1][num2].innerHTML = "<img class=\"piece\" src=\"pieces/bR.jpeg\" alt=\"Black Rook\" >";
+            break;
+        case "bB":
+            cells[num1][num2].innerHTML = "<img class=\"piece\" src=\"pieces/bB.jpeg\" alt=\"Black Bishop\" >";
+            break;
+        case "bN":
+            cells[num1][num2].innerHTML = "<img class=\"piece\" src=\"pieces/bN.jpeg\" alt=\"Black Knight\" >";
+            break;
+        case "bK":
+            cells[num1][num2].innerHTML = "<img class=\"piece\" src=\"pieces/bK.jpeg\" alt=\"Black King\" >";
+            break;
+        case "bQ":
+            cells[num1][num2].innerHTML = "<img class=\"piece\" src=\"pieces/bQ.jpeg\" alt=\"Black Queen\" >";
+            break;
+        case "bP":
+            cells[num1][num2].innerHTML = "<img class=\"piece\" src=\"pieces/bP.jpeg\" alt=\"Black Pawn\" >";
+            break;
+        default:
+            cells[num1][num2].innerHTML = cells[num1][num2].piece;
+    }
+    
 }
 
 function placePiece(num1, num2, p){
@@ -81,6 +125,7 @@ function removePiece(num1, num2){
 //--------------------------
 //-------Move_Pieces--------
 //--------------------------
+
 let killed = false;
 let enPassant = false;
 //7
@@ -94,6 +139,7 @@ let grabCol = null;
 
 function canMove(num1,num2){
     let retVal = false;
+    let clean = true;
     switch(pieceGrabbed[1]){
         case 'P':
             if(pieceGrabbed[0] == 'w'){
@@ -125,7 +171,6 @@ function canMove(num1,num2){
                     }
                     //capture en-passant
                     else{
-                    console.log("P" + boardCols[num2] + 8-(num1-1) + boardCols[num2] + 8-(num1+1));
                         if(lastMove == ("P" + boardCols[num2] + (8-(num1-1)) + boardCols[num2] + (8-(num1+1)))){
                             removePiece(num1+1,num2);
                             enPassant = true;
@@ -162,7 +207,6 @@ function canMove(num1,num2){
                     }
                     //capture en-passant
                     else{
-                    console.log("P" + boardCols[num2] + 8-(num1-1) + boardCols[num2] + 8-(num1+1));
                         if(lastMove == ("P" + boardCols[num2] + (8-(num1+1)) + boardCols[num2] + (8-(num1-1)))){
                             removePiece(num1-1,num2);
                             enPassant = true;
@@ -198,10 +242,14 @@ function canMove(num1,num2){
             }
             break;
         case 'N':
+            if(cells[num1][num2].piece != null){
+                if(cells[num1][num2].piece[0] != pieceGrabbed[0]){
+                    retVal = true;
+                }
+            }
             break;
         case 'R':
             //check if in line
-            let clean = true;
             if((num1-grabRow == 0) && (num2-grabCol != 0)){
                 let dir = (num2-grabCol)/Math.abs(num2-grabCol);
                 //check if clean
@@ -242,8 +290,79 @@ function canMove(num1,num2){
             }
             break;
         case 'K':
+            if(Math.abs(num1-grabRow) < 2 && Math.abs(num2-grabCol) < 2){
+                if(cells[num1][num2].piece != null){
+                    if(cells[num1][num2].piece[0] != pieceGrabbed[0]){
+                        retVal = true;
+                    }
+                }
+                else{
+                    retVal = true;
+                }
+            }
             break;
         case 'Q':
+            //check if diagonal
+            if(Math.abs(num1-grabRow) == Math.abs(num2-grabCol)){
+                //checks if path is clean
+                let rowDir = (num1-grabRow)/Math.abs(num1-grabRow);
+                let colDir = (num2-grabCol)/Math.abs(num2-grabCol);
+                for(let i = 1; i < Math.abs(num1-grabRow); i++){
+                    if(cells[grabRow + (i*rowDir)][grabCol + (i*colDir)].piece != null){
+                        clean = false;
+                    }
+                }
+                if(clean){
+                    //check if not alied piece on destination
+                    if(cells[num1][num2].piece != null){
+                        if(cells[num1][num2].piece[0] != pieceGrabbed[0]){
+                            retVal = true;
+                        }
+                    }
+                    else{
+                        retVal = true;
+                    }
+                }
+            }
+            //check if in line
+            else if((num1-grabRow == 0) && (num2-grabCol != 0)){
+                let dir = (num2-grabCol)/Math.abs(num2-grabCol);
+                //check if clean
+                for(let i = 1; i < Math.abs(num2-grabCol); i++){
+                    if(cells[num1][grabCol+i*dir].piece != null){
+                        clean = false;
+                    }
+                }
+                if(clean){
+                    if(cells[num1][num2].piece != null){
+                        if(cells[num1][num2].piece[0] != pieceGrabbed[0]){
+                            retVal = true;
+                        }
+                    }
+                    else{
+                        retVal = true;
+                    }
+                }
+            }
+            else if((num2-grabCol == 0) && (num1-grabRow != 0)){
+                let dir = (num1-grabRow)/Math.abs(num1-grabRow);
+                //check if clean
+                for(let i = 1; i < Math.abs(num2-grabCol); i++){
+                    if(cells[num1 + 1*dir][grabCol].piece != null){
+                        clean = false;
+                    }
+                }
+                if(clean){
+                    if(cells[num1][num2].piece != null){
+                        if(cells[num1][num2].piece[0] != pieceGrabbed[0]){
+                            retVal = true;
+                        }
+                    }
+                    else{
+                        retVal = true;
+                    }
+                }
+            }
             break;
     }
     return retVal;
@@ -275,11 +394,12 @@ function deSelect(){
 }
 function selectCell(e){
     let rect = container.getBoundingClientRect();
-    let mouseX = e.clientX - rect.left;
-    let mouseY = e.clientY - rect.top;
+    let mouseX = e.clientX - cells[0][0].offsetLeft;
+    let mouseY = e.clientY - cells[0][0].offsetTop;
     let columnWidth = CELL_WIDTH+CELL_SPACING;
     let col = Math.floor(mouseX/columnWidth);
     let row = Math.floor(mouseY/columnWidth);
+    console.log(col, row);
     let selectedCell = cells[row][col];
     if(pieceGrabbed != null){
         if(canMove(row,col)){
@@ -352,5 +472,4 @@ function makeLog(num1, num2){
     currLi.innerHTML += lastMove;
     currLi.innerHTML += "  ";
 }
-            
-        
+           

@@ -33,18 +33,27 @@ span.cellSelected{
 }
 
 #gridContainer{
-    top:100px;
-    left:5px;
-    padding:0;
-    display:inline-block;
-    position:absolute;
+    margin-top:10%;
+    margin-left:30%;
+    display:block;
 }
 
 .piece{
     height:70px;
     padding:10px;
 }
-
+#diffs{
+    background-color:white;
+    width:440px;
+}
+#diffs ul{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 15px;
+}
+#diffs ul p{
+    text-align:justify;
+}
 #colorChooser{
     position: absolute;
     top: 65px;
@@ -80,4 +89,5 @@ h1{
     font-size:3em;
     top: 0;
     text-align:center;
+    margin-left:35%;
 }
