@@ -17,8 +17,9 @@
         <label id="bMinutes">00</label>:<label id="bSeconds">00</label>
         </div>
         <div id="diffs">
+        <h2><b>What are the differences from regular Online Chess?</b></h2>
         <ul>
-        <p><b>What are the differences from regular Online Chess?</b></p>
+        
         <li><b>Invalid moves: you are allowed to hurt yourself!</b>
         <p>In Online Chess you are not allowed to put your king in check. Also when your king is in check, you are also not 
         allowed to make moves that do not put him in a safe position. Here you are free to do both.</p>
@@ -27,13 +28,25 @@
         <p>The same way you can hurt yourself by making an invalid move, you can make the mistake of missing a checkmate in
         0! That is not allowed in Online Chess, as the game ends as soon as one of the players has no valid moves.</p>
         </li>
+        <li><b>Stalemate: yeah, it does not exist!</b>
+        <p>Stalemates happen when no player has legal moves and results in a draw. Since you can make ilegal moves here, 
+        there is no stalemate!</p>
+        </li>
+        <li><b>Check Notation: you are not warned you are in check!</b>
+        <p>In online chess, there is a '+' after the move in the log. For example, if Black King in c6 and White Knight moves to d4,
+        you would see something like Ne7d5+ on the log. Here, you do not have that!</p>
+        </li>
         </ul>
         </div>
         <div id="log"> 
         <ol></ol>
         </div>
         <div id="gridContainer"></div>
-        <a id="piecesCredit" href="https://www.freepik.com/free-vector/four-set-of-chess-pieces-illustration_1169103.htm">Chess Pieces by Freepik</a>
+        <div id="piecesCredit">
+        <p>Credits:<br>
+        <a href="https://www.freepik.com/free-vector/four-set-of-chess-pieces-illustration_1169103.htm" target="_blank">Chess Pieces by Freepik</a><br>
+        <a href="https://pixabay.com/en/floor-parquet-pattern-wood-1866663/" target="_blank">Background Image by Pixels</a>
+        </p></div>
  
         <script src="chessLogic.js"></script>
     </body>
