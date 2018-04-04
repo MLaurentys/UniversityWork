@@ -9,7 +9,7 @@ let bSec = document.querySelector("#bSeconds");
 let wtimer = document.querySelector("#wTimer");
 let wMin = document.querySelector("#wMinutes");
 let wSec = document.querySelector("#wSeconds");
-setInterval(updateTimer, 1000);
+let time = setInterval(updateTimer, 1000);
 //--------------------------
 //-------Make_Board---------
 //--------------------------
@@ -130,6 +130,7 @@ function removePiece(num1, num2){
 
 let killed = false;
 let enPassant = false;
+let killedKing = "";
 //7
 container.onclick = selectCell;
 let toPlay = 'w';
@@ -374,6 +375,11 @@ function canMove(num1,num2){
             }
             break;
     }
+    if(cells[num1][num2].piece != null){
+        if(cells[num1][num2].piece[1] == 'K'){
+            killedKing = cells[num1][num2].piece[0];
+        }
+    }
     return retVal;
 }
     
@@ -408,7 +414,6 @@ function selectCell(e){
     let columnWidth = CELL_WIDTH+CELL_SPACING;
     let col = Math.floor(mouseX/columnWidth);
     let row = Math.floor(mouseY/columnWidth);
-    console.log(col, row);
     let selectedCell = cells[row][col];
     if(pieceGrabbed != null){
         if(canMove(row,col)){
@@ -435,9 +440,9 @@ function selectCell(e){
 //------Updates_Clock-------
 //--------------------------
 
-wtimer.style.marginTop=boardTop + 5*CELL_WIDTH + "px";
+wtimer.style.marginTop=boardTop + 3*CELL_WIDTH + "px";
 wtimer.style.marginLeft=boardLeft + 8*CELL_WIDTH + "px";
-btimer.style.marginTop=boardTop + 2*CELL_WIDTH - 15 + "px";
+btimer.style.marginTop=boardTop - 15 + "px";
 btimer.style.marginLeft=boardLeft + 8*CELL_WIDTH + "px";
 function pad(val) {
   var valString = val + "";
@@ -479,11 +484,33 @@ function makeLog(num1, num2){
     lastMove += cells[grabRow][grabCol].piece[1];
     lastMove += boardCols[grabCol];
     lastMove += 8-grabRow;
-    if(killed){lastMove += 'x'}
+    if(killed){
+        lastMove += 'x';
+    }
     lastMove += boardCols[num2];
     lastMove += 8-num1;
     if(enPassant){lastMove += '!'}
     currLi.innerHTML += lastMove;
     currLi.innerHTML += "  ";
+    if(killedKing){
+        currLi.innerHTML += "<br>" ;
+        currLi.innerHTML += "GAME ENDED" ;
+        currLi.innerHTML += "<br/>";
+        currLi.innerHTML += killedKing=='w'? "Black":"White" + " Won!";
+        endGame();
+    }
 }
-           
+
+//--------------------------
+//------Ends_The_Game-------
+//--------------------------
+
+function endGame(){
+    clearInterval(time);
+    container.onclick = null;
+}
+
+
+
+
+
