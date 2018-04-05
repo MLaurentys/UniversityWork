@@ -218,6 +218,11 @@ function canMove(num1,num2){
                     }
                 }
             }
+            if(retVal){
+                if(num1 == 0 || num1 == 7){
+                    cells[grabRow][grabCol].piece = cells[grabRow][grabCol].piece[0] + 'Q';
+                }
+            }
             break;
         case 'B':
             //check if diagonal

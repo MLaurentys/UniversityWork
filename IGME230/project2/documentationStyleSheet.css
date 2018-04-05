@@ -1,0 +1,25 @@
+@font-face{
+    font-family: Press;
+    src: url("PressStart2P.ttf") format("opentype");
+}
+*{
+        
+}
+h1{
+    font-family: Press, cursive;
+    font-size:4em;
+    text-align:center;
+    color:darkGray;
+
+}
+div{
+    color:rgba(255,255,255,0.76);
+    font-size:2em;
+    margin-left:30vw;
+}
+a:visited{
+    color:blue;
+}
+p{
+    color:white;
+}

@@ -1,3 +1,8 @@
+@font-face{
+    font-family: Press;
+    src: url("PressStart2P.ttf") format("opentype");
+}
+
 span.cell{
     height:84px;
     width:84px;
@@ -96,6 +101,19 @@ a:visited{
     text-align:center;
    
 }
+nav{
+    position:absolute;
+    margin-top:69vh;
+    margin-left: 11vw;
+    
+}
+nav button{
+    display:block;
+    width:14vw;
+    height:3vh;
+    margin:4px;
+    border-radius:10px;
+}
 #log{
     padding-top:5px;
     padding-bottom:5px;
@@ -114,11 +132,11 @@ a:visited{
         margin-left:30px;
 }
 h1{
-    font-family: 'Press Start 2P', cursive;
-    display: inline;
+    font-family: Press, cursive;
     position:absolute;
     font-size:3em;
     top: 0;
     text-align:center;
-    margin-left:35%;
+    margin-left:21%;
+    color:darkGray;
 }
