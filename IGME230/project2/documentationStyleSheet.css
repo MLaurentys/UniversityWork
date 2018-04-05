@@ -2,8 +2,8 @@
     font-family: Press;
     src: url("PressStart2P.ttf") format("opentype");
 }
-*{
-        
+body{
+    background-image:url("background.jpeg");
 }
 h1{
     font-family: Press, cursive;

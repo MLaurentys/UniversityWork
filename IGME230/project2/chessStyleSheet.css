@@ -21,8 +21,7 @@ span.cell{
     position:absolute;
 }
 body{
-    background:backgroundImage;
-    
+    background-image:url("background.jpeg");
 }
 span.cell:hover{
     border-color:red;

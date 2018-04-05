@@ -1,0 +1,53 @@
+h1{
+    background-color:Red;
+    text-align:center;
+    height: 120%;
+}
+h2,h3{
+	text-align:center;
+	color:Green;
+}
+h4{
+	font-size:20px;
+}
+#personalphoto{
+	padding: 10px;
+    width:150px;
+    height:201px;
+    float:left;
+    margin-right: 20px;
+	border: 1px black solid;
+}
+.introduction{
+    margin-left:30px;
+    text-align:justify;
+    margin-right:30px;
+}
+#projectsList{
+	float:left;
+    height:214px;
+	width:300px;
+	border:1px black solid;
+}
+.base{
+	background-color:LightBlue;
+    margin-left:7%;
+    margin-right:7%;
+}
+#introtext{
+	padding: 10px;
+	height:201px;
+	border: 1px black solid;
+}
+
+.projectsIndex{
+	border : 1px black solid;
+	height:214px;
+
+}
+.centerOnly{
+	align:center;
+}
+#projecGuide{
+	width:140px;padding:7px;border: 1px solid black; float:left; height:200px; 
+}
