@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Circle Blast!</title>
+	<style>
+	body{
+		cursor: url(images/move.png) 8 8,crosshair;
+	}
+	</style>
+</head>
+<body>
+<!-- External libraries -->
+<!-- https://github.com/pixijs/pixi.js?utm_source=html5weekly -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.0/pixi.min.js"></script>
+<!--  https://github.com/goldfire/howler.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.5/howler.js"></script>
+
+<!-- My JS files -->
+
+<!-- Physics Library -->
+<script src="js/matter.js"></script>
+    
+<!-- LOAD PLAYER -->
+<script src="js/Player/Movement.js"></script>
+<script src="js/Player/Player.js"></script>
+    
+<!-- LOAD COLLIDERS -->
+<!-- LOAD BALL -->
+<script src="js/Collider/Ball/Ball.js"></script>  
+<script src="js/Collider/Ball/Ball_Movement.js"></script> 
+<script src="js/Collider/Ball/Gavity.js"></script> 
+<script src="js/Collider/Ball/BounceOnBounds.js"></script> 
+<script src="js/Collider/Ball/CollisionPlayer.js"></script> 
+
+<!-- LOAD MISC -->
+<script src="js/utilities.js"></script>
+
+<!-- LOAD GAME SIMULATOR -->
+<script src="js/GameSimulator/Setup.js"></script> 
+<script src="js/GameSimulator/CreateLabelsAndButtons.js"></script> 
+<script src="js/classes.js"></script>
+
+<script src="js/main.js"></script>
+</body>
+</html>
