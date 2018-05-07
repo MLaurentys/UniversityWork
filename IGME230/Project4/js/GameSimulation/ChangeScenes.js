@@ -4,21 +4,37 @@ function startGame(){
     gameOverScene.visible = false;
     gameScene.visible = true;
     score = 0;
+    placeTargets();
     increaseScoreBy(0);
     updateLocalMaxScore();
-    //resetPlayerAndDiamond();
+    resetPlayerAndDiamond();
     //loadLevel();
     console.log("ok");
 }
 
 function resetPlayerAndDiamond(){
+
+    if (diamond != null){
+        Matter.Composite.remove(world, diamond);
+        gameScene.removeChild(diamond);
+    }
+    if(player != null){gameScene.removeChild(player);}
     player = new Player();
     gameScene.addChild(player);
-    Matter.Composite.remove(world, diamond);
-    gameScene.removeChild(diamond);
     diamond = new Diamond();
     gameScene.addChild(diamond);
-    World.add(world, diamond);
+    World.add(world, diamond.body);
+    ready = true;
+}
+
+function placeTargets(){
+    targets = [];
+
+    for(let i = 0; i < Math.floor(3.5*currLevel); i++){
+        console.log("adding");
+        targets[i] = (new Target(50*(i%11), 40*(Math.floor(i/11))));
+        gameScene.addChild(targets[i]);
+    }
 }
 
 function endGame() {

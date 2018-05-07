@@ -80,26 +80,7 @@ class Diamond extends PIXI.Sprite{
         }
     }
     
-    bounceWalls(){
-        if(this.x < 0){
-            this.vx *= -1;
-            Matter.Body.setPosition(this.body, Vector.create(this.width/2 + 1, this.y));
-        }
-        else if(this.x > SCENE_WIDTH){
-            this.x = 2*SCENE_WIDTH - this.x;
-            this.vx *= -1;
-            Matter.Body.setPosition(this.body, Vector.create(SCENE_WIDTH - this.width/2 - 1, this.y));
-        }
-        if(this.y - this.height/2< 0){
-            this.vy *= -1;
-            Matter.Body.setPosition(this.body, Vector.create(this.position.x, this.height - 1));
-        }
-        else if(this.y + this.height/2 > SCENE_HEIGHT){
-            this.vy *= -1;
-            //life = 0;
-            //endGame();
-        }
-    }
+
     
 
     move(player, amt){
@@ -107,7 +88,8 @@ class Diamond extends PIXI.Sprite{
         this.vy = this.body.velocity.y;
 
         this.collidePlayer(player);
-        this.bounceWalls();
+        collideTargets(this);
+        bounceWalls(this);
         
         Matter.Body.setVelocity(this.body, Matter.Vector.mult(Matter.Vector.normalise(Matter.Vector.create(this.vx,this.vy)), this.maxSpeed));
         
