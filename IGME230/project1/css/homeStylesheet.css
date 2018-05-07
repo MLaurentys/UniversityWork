@@ -9,13 +9,14 @@ header{
 }
 h1{
     margin:0;
+    padding-bottom:0px;
 }
 .mainHeader {
     color:Blue;
     background-color: Green;
     margin-bottom:2px;
     margin-left: 5%;
-    height:220px;
+    height:180px;
     width:90%;
     position:fixed;
     top:0;
@@ -28,11 +29,11 @@ h1{
     background-color:LightGray;
     padding-top:1%;
     padding-bottom:1%;
-    font-size:5em;
+    font-size:4em;
 }
 .mainHeader ul{
     text-align:center;
-    font-size:2em;
+    font-size:1.5em;
     
 }
 .mainHeader li{
@@ -79,7 +80,7 @@ footer{
     bottom:0;
     background-color: Green;
     margin-left: 5%;
-    
+    display:inline;
     width:90%;
 }
 #lastTheme{
@@ -111,6 +112,25 @@ footer{
     background-color:LightGray;
 }
 
+#gameItself{
+    margin-left:25%;
+}
+#gameRanking{
+    padding:5px;
+    margin:5px;
+
+    font-size:1.5em;
+    max-height:400px;
+    background-color:#cdaa67;
+    overflow-y: scroll;
+    border: 4px solid black;
+    border-top-left-radius:25px;
+    margin-bottom:10px;
+}
+#toggleGameMode{
+    display:block;
+    margin-right:45px;
+}
 /* Button */
 a:link, a:visited{
     color: White;

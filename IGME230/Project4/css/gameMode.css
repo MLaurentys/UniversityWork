@@ -1,0 +1,21 @@
+*{
+    visibility: hidden;
+}
+button{
+    position:absolute;
+    left: 0;
+    top:0;
+    width:55px;
+    visibility: visible;
+}
+#gameItself {
+    position: absolute;
+    left:31%;
+    top:10%;    
+    visibility: visible;
+    height:799px;
+    border:3px solid black;
+}
+#gameItself *{
+    visibility:visible;
+}

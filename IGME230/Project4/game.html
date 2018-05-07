@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Blazing Diamonds!</title>
+    <link rel="stylesheet" type="text/css" href="../project1/css/homeStylesheet.css" />
+
+	<style>
+	body{
+		cursor: url(images/move.png) 8 8,crosshair;
+	}
+	</style>
+</head>
+<body>
+    <!-- FIXED HEADER -->
+    <header class="mainHeader">
+    <nav>
+        <h1>Blazing Diamond</h1>
+        <ul>
+        <li><a href="../project1/index.html">Homepage</a><li>
+        <li><a href="../project1/proposal.html">Proposal</a><li>
+        <li><a href="../project1/documentation.html">Documentation</a><li>
+        <li><a id="currSelected" href="game.html">Playable</a><li>
+        </ul>
+        </nav>
+    </header>
+    <!-- OVERVIEW TEXT -->
+    <section class="overview">
+        <h2 id="pageTitle">The Game</h2>
+        <!-- <div class="text"> -->
+            <!-- <p>This is just a placeholder!<br>Stay Tuned!</p> -->
+            <!-- <img id="homePic" alt="gameIdea" src="media/Samplepic1.png"/> -->
+        <!-- </div> -->
+        <nav id="toggleGameMode"><button>Toggle Play Mode</button></nav>
+        
+        
+        <div id="gameItself"></div>
+        <div id="gameRanking">
+        <h2>Ranking:</h2>
+            <ol id="ranking">
+            <li>Matheus -> 103</li></ol>
+        </div>
+    </section>
+    <footer>
+        <p>Matheus Tararam de Laurentys mtl9706@g.rit.edu (585)310-2496</p>
+    </footer>
+<!-- External libraries -->
+<!-- https://github.com/pixijs/pixi.js?utm_source=html5weekly -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.0/pixi.min.js"></script>
+<!--  https://github.com/goldfire/howler.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.5/howler.js"></script>
+
+<!-- My JS files -->
+
+<!-- Physics Library -->
+<script src="js/Engine/matter.js"></script>
+<script src="js/Engine/PhysicsSprite.js"></script>
+
+<!-- LOAD COLLIDERS -->
+<!-- LOAD PLAYER -->
+<script src="js/Movables/Player/Player.js"></script>
+<script src="js/Movables/Player/Movement.js"></script>
+    
+<!-- LOAD Diamond -->
+<script src="js/Movables/Diamond/Diamond.js"></script>
+
+<!-- LOAD MISC -->
+
+    
+<!-- LOAD GAME SIMULATOR -->
+<script src="js/GameSimulation/GameLoop.js"></script> 
+<script src="js/GameSimulation/ChangeScenes.js"></script>
+<script src="js/GameSimulation/CreateButtonsAndLabels.js"></script>
+<script src="js/GameSimulation/CreateInteractibles.js"></script>
+<script src="js/GameSimulation/Setup.js"></script> 
+<script src="js/GameSimulation/Loader.js"></script>
+<script src="js/GameSimulation/updatingValues.js"></script>
+<script>
+//change stylesheet
+    let link1 = "../project1/css/homeStylesheet.css";
+    let link2 = "css/gameMode.css";
+    let currLink = 0;
+    let style = document.querySelector("link");
+    let toggle = document.querySelector("button");
+    toggle.onclick = function(){
+        if(currLink == 0){
+            style.setAttribute("href", link2);
+
+            currLink = 1;
+        }
+        else{
+            style.setAttribute("href", link1);
+            currLink = 0;
+        }
+        console.log("click");
+    }
+</script>
+</body>
+</html>
