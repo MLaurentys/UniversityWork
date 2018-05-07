@@ -1,10 +1,13 @@
 "use strict"; 
 function setup() {
 	stage = app.stage;
+
     
     setupStart();
     setupGame();
     setupEnd();
+    createLabelsAndButtons();
+    startCreateInteractibles();
     app.ticker.add(gameLoop);
 }
 
@@ -15,13 +18,23 @@ function setupStart(){
 }
 
 function setupGame(){
+    //matter
+    engine = Engine.create();
+    world = engine.world;
+    Engine.run(engine);
+    world.gravity.y = 0;
+    world.friction = 0;
+    world.frictionAir = 0;
+    //scenes
     gameScene = new PIXI.Container();
     gameScene.visible = false;
     stage.addChild(gameScene);
-    player = new Player();
-    gameScene.addChild(player);
-    diamond = new Diamond();
-    gameScene.addChild(diamond);
+    startCreateInteractibles();
+    
+    //game keyboard input
+    left = keyboard(37);
+    right = keyboard(39);
+
     
 }
 
