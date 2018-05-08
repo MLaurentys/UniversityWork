@@ -10,22 +10,32 @@ function collideTargets(diamond){
     }
     
     //console.log(index);
+    
+    //efficiency
     if(diamond.y - diamond.height/2 < targets[index].y+targets[index].height/2){
-        console.log("aqui");
-        for(tf of targets){
-            if(tf==null){
-                console.log("error");
+        //console.log("aqui");
+        for(; index >= 0; index--){
+            if(targets[index]==null){
+                //console.log("deleted");
                 continue;
             }
-            if(diamond.y - diamond.height/2 < tf.y + tf.height/2  &&
-              diamond.y + diamond.height/2 > tf.y - tf.height/2 &&
-               diamond.x - diamond.width/2 < tf.x + tf.width/2 &&
-               diamond.x + diamond.width/2 > tf.x - tf.width/2)
+            //AABB
+            if(diamond.y - diamond.height/2 < targets[index].y + targets[index].height/2  &&
+              diamond.y + diamond.height/2 > targets[index].y - targets[index].height/2 &&
+               diamond.x - diamond.width/2 < targets[index].x + targets[index].width/2 &&
+               diamond.x + diamond.width/2 > targets[index].x - targets[index].width/2)
                 {
-                    gameScene.removeChild(tf);
-                    tf = null;
-                    diamond.vy *= -1;
-                    diamond.vx *= -1;
+                    gameScene.removeChild(targets[index]);
+                    //console.log("colided with target");
+                    //changes direction
+                    if(diamond.x + diamond.width/2 - 5 > targets[index].x-targets[index].width/2 && diamond.x - diamond.width/2 + 5 < targets[index].x + targets[index].width/2)
+                        diamond.vy *= -1;
+                    if(diamond.y + diamond.height/2 - 2> targets[index].y-targets[index].height/2 && diamond.y- diamond.height/2 + 2< targets[index].y + targets[index].height/2)
+                        diamond.vx *= -1;
+                    targets[index] = null;
+                    remainingTargets--;
+                    player.speed *= 1.1;
+                    diamond.maxSpeed *= 1.1;
                 }
         }
     }

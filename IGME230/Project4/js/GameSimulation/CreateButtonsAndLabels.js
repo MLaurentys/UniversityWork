@@ -1,10 +1,11 @@
 "use strict";
+//creates all static labels and button across the whole game
 function createLabelsAndButtons(){
     mainMenuButtonsAndLabels();
     gameButtonsAndLabels();
     endMenuButtonsAndLabels();
 }
-
+//exclusive for main screen
 function mainMenuButtonsAndLabels(){
     //background
     startScene.addChild(PIXI.Sprite.fromImage("Images/Backgrounds/Menu/Menu.png"));
@@ -21,7 +22,7 @@ function mainMenuButtonsAndLabels(){
     startButton.on('pointerout', e=>e.currentTarget.alpha = 1.0);
     startScene.addChild(startButton);
 }
-
+//exclusive for game scene
 function gameButtonsAndLabels(){
     //Create Background
     gameScene.addChild(PIXI.Sprite.fromImage("Images/Backgrounds/Game/GameBackground.png"));
@@ -57,7 +58,24 @@ function gameButtonsAndLabels(){
 
 
 }
-
+//exclusive for endGame
 function endMenuButtonsAndLabels(){
-    
+    //background
+    gameOverScene.addChild(PIXI.Sprite.fromImage("Images/Backgrounds/EndGame/endScreen.png"));
+    gameOverScoreLabel = new PIXI.Text("Final Score: ");
+    gameOverScoreLabel.style = new PIXI.TextStyle({
+        fill: 0xFFFFFF,
+        fontSize: 32,
+        fontFamily: 'Verdana',
+        stroke:0xFF0000,
+        strokeThickness:6,
+        alpha: 0.8
+    })
+    gameOverScoreLabel.x = 100;
+    gameOverScoreLabel.y = 350;
+    gameOverScene.addChild(gameOverScoreLabel);
 }
+
+
+
+

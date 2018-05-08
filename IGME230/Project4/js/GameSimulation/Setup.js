@@ -7,7 +7,6 @@ function setup() {
     setupGame();
     setupEnd();
     createLabelsAndButtons();
-    startCreateInteractibles();
     app.ticker.add(gameLoop);
 }
 
@@ -30,17 +29,20 @@ function setupGame(){
     gameScene = new PIXI.Container();
     gameScene.visible = false;
     stage.addChild(gameScene);
-    startCreateInteractibles();
-    gameOverScore = 0;
     scoreTimer = 0;
     localMaxScore = 0;
     currLevel = 1;
     ready = false;
     diamond = null;
     //game keyboard input
-    left = keyboard(37);
-    right = keyboard(39);
-
+    left = keyboard(37);  //movement
+    right = keyboard(39); //movement
+    space = keyboard(32); //restarting game after game over
+    space.press = function(){
+        if(gameOverScene.visible){
+            Restart();
+        }
+    }
     
 }
 

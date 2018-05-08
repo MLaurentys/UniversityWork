@@ -6,11 +6,12 @@ function keyboard(keyCode) {
   key.code = keyCode;
   key.isDown = false;
   key.isUp = true;
-  key.press = undefined;
+  key.press = undefined; 
   key.release = undefined;
   //The `downHandler`
   key.downHandler = event => {
     if (event.keyCode === key.code) {
+      if (key.isUp && key.press) key.press();
       key.isDown = true;
       key.isUp = false;
     }
@@ -20,6 +21,7 @@ function keyboard(keyCode) {
   //The `upHandler`
   key.upHandler = event => {
     if (event.keyCode === key.code) {
+      if (key.isDown && key.release) key.release();
       key.isDown = false;
       key.isUp = true;
     }

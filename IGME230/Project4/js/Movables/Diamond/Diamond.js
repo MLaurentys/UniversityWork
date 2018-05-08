@@ -27,9 +27,11 @@ class Diamond extends PIXI.Sprite{
         this.maxSpeed = 4; //mas speed == vx^2 + vy^2
         console.log(this.body.velocity);
     }
+    //AABB collision with player
     collidePlayer(player){
         if(this.y > player.y - this.height){
-            if(this.x < player.x + player.width/2 && this.x > player.x - player.width/2){
+            //little handcap
+            if(this.x -3 < player.x + player.width/2 && this.x + 3> player.x - player.width/2){
                 
                 //CONVERTS VY into VX or VX into VY
                 //if exceeding, ignores

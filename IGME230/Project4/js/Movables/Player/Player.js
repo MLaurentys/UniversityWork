@@ -16,5 +16,8 @@ class Player extends PIXI.Sprite{
         if(right.isDown){
             this.x += this.speed;
         }
+        if(this.x + this.width/2> SCENE_WIDTH){this.x = SCENE_WIDTH - this.width/2;}
+        if(this.x - this.width/2 < 0){this.x = this.width/2;}
+
     }
 }

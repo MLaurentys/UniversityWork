@@ -38,19 +38,19 @@ let localMaxScoreLabel;
 let currLevel;
 let targets;
 let ready;
-
+let remainingTargets;
 //endgame scene
 let gameOverScene;
-let gameOverScore;
 let gameOverScoreLabel;
 let finalScore;
 let backToStartButton;
+let space;
 
 let paused = true;
 
 //pre-load images
 PIXI.loader.add(
 ["Images/Backgrounds/Game/GameBackground.png", "Images/Backgrounds/Menu/Menu.png", "Images/Movables/Player.png", "Images/Movables/Diamond.png",
-"Images/Targets/target.png"]
+"Images/Targets/target.png", "Images/Backgrounds/Game/Instructions.png", "Images/Backgrounds/EndGame/endScreen.png"]
 ).on("progress",e=>{console.log(`progress=${e.progress}`)}).load(setup);
 
