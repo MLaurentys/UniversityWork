@@ -1,5 +1,5 @@
 "use strict";
-const app = new PIXI.Application(600,800);
+const app = new PIXI.Application(525,700);
 document.querySelector("#gameItself").appendChild(app.view);
 
 // global constants
@@ -39,13 +39,16 @@ let currLevel;
 let targets;
 let ready;
 let remainingTargets;
+let instructionsActive;
+let instructions;
+
 //endgame scene
 let gameOverScene;
 let gameOverScoreLabel;
 let finalScore;
 let backToStartButton;
 let space;
-
+let enterHighScore;
 let paused = true;
 
 //pre-load images
@@ -54,3 +57,24 @@ PIXI.loader.add(
 "Images/Targets/target.png", "Images/Backgrounds/Game/Instructions.png", "Images/Backgrounds/EndGame/endScreen.png"]
 ).on("progress",e=>{console.log(`progress=${e.progress}`)}).load(setup);
 
+//audio
+let backSong = new Howl({
+        src: ['audio/backSong.mp3'],
+        loop: 1,
+        volume:0.7,
+        rate:0.5
+    });
+let endSong = new Howl({
+        src: ['audio/endGame.mp3'],
+        loop: 1,
+        volume:0.7,
+        rate:0.5
+});
+endSong.play();
+endSong.pause();
+backSong.play();
+let collideAudio = new Howl({
+        src: ['audio/collide.mp3'],
+        volume:1,
+        rate:1
+});

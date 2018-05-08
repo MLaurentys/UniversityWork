@@ -18,5 +18,10 @@ function gameLoop(){
             currLevel++;
             placeTargets();
         }
+        if(instructions.visible){
+            if(score > 5){
+                instructions.visible = false;
+            }
+        }
     }
 }

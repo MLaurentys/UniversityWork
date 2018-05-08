@@ -26,6 +26,9 @@ function placeTargets(){
         remainingTargets++;
     }
 }
+function placeInstructions(){
+    
+}
 //Start -> Game
 function startGame(){
     startScene.visible = false;
@@ -38,6 +41,8 @@ function startGame(){
     resetPlayerAndDiamond();
     //loadLevel();
     console.log("ok");
+    instructions.visible = true;
+    instructionsActive;
 }
 
 //Game -> gameOver
@@ -51,7 +56,13 @@ function endGame() {
     // clear out level
     gameOverScene.visible = true;
     gameScene.visible = false;
+    //register highscore!
     
+    if(register(score)){
+        enterHighScore.visible = true;
+    }
+    endSong.play();
+    backSong.pause();
 }
 
 //gameOver -> Start
@@ -67,5 +78,10 @@ function Restart(){
             console.log("not"); 
         }
     }
+    //hide highscore
+    enterHighScore.visible = false;
+    hideHS();
     currLevel = 1;
+    endSong.pause();
+    backSong.play();
 }

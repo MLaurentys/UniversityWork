@@ -36,6 +36,7 @@ function collideTargets(diamond){
                     remainingTargets--;
                     player.speed *= 1.1;
                     diamond.maxSpeed *= 1.1;
+                    collideAudio.play();
                 }
         }
     }

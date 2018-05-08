@@ -32,13 +32,18 @@
             <!-- <img id="homePic" alt="gameIdea" src="media/Samplepic1.png"/> -->
         <!-- </div> -->
         <nav id="toggleGameMode"><button>Toggle Play Mode</button></nav>
-        
+        <nav id="toggleMinimalMode"><button>Toggle Minimal Mode</button></nav>
         
         <div id="gameItself"></div>
         <div id="gameRanking">
+        <div id="playerName">
+            What is your name -> <input type='text' id='nameField'>
+        <button id="submitName">Save My Name</button>
+        </div>
         <h2>Ranking:</h2>
             <ol id="ranking"></ol>
         </div>
+
     </section>
     <footer>
         <p>Matheus Tararam de Laurentys mtl9706@g.rit.edu (585)310-2496</p>
@@ -55,7 +60,7 @@
 
 <!-- My JS files -->
 
-<!-- Physics Library -->
+<!-- My Engines -->
 <script src="js/Engine/matter.js"></script>
 <script src="js/Engine/collideWalls.js"></script>
 <script src="js/Engine/collideTargets.js"></script>
@@ -84,11 +89,13 @@
 <script src="js/GameSimulation/updatingValues.js"></script>
 <script>
 //change stylesheet
+    
+    //Playmode
     let link1 = "../project1/css/homeStylesheet.css";
     let link2 = "css/gameMode.css";
     let currLink = 0;
     let style = document.querySelector("link");
-    let toggle = document.querySelector("button");
+    let toggle = document.querySelector("#toggleGameMode button");
     toggle.onclick = function(){
         if(currLink == 0){
             style.setAttribute("href", link2);
@@ -99,10 +106,24 @@
             style.setAttribute("href", link1);
             currLink = 0;
         }
-        console.log("click");
+    }
+    
+    //Minimal Mode
+    let link3 = "css/minimalMode.css";
+    let minimal = document.querySelector("#toggleMinimalMode button");
+    let currClick2 = 0;
+    minimal.onclick = function(){
+        if(currClick2 == 0){
+            style.setAttribute("href", link3);
+
+            currClick2 = 1;
+        }
+        else{
+            style.setAttribute("href", link1);
+            currClick2 = 0;
+        }
     }
 //save highscores
-    
 //put highscores on the list
 </script>
 </body>

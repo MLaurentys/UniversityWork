@@ -1,0 +1,48 @@
+*{
+    visibility: hidden;
+}
+body{
+    background-color: lightslategray;
+}
+#toggleGameMode button{
+    position:absolute;
+    left: 0;
+    top:0;
+    width:60px;
+    visibility: visible;
+}
+#toggleMinimalMode button{
+    position:absolute;
+    left: 0;
+    top:60px;
+    width:60px;
+    visibility: visible;
+}
+#gameItself {
+    position: absolute;
+    top:130px;    
+    visibility: visible;
+    height:699px;
+    border:3px solid black;
+}
+#gameItself *{
+    visibility:visible;
+}
+#playerName {
+    //visibility: visible;
+    position:absolute;
+    left:70px;
+    top:10px;
+}
+#playerName input{
+    //visibility: visible;
+    position:absolute;
+    z-index: 1;
+}
+#submitName{
+    position: absolute;
+    visibility: hidden;
+    left: 60px;
+    top: 50px;
+    width: 150px;
+}

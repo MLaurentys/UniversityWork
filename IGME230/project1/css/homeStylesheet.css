@@ -127,9 +127,23 @@ footer{
     border-top-left-radius:25px;
     margin-bottom:10px;
 }
-#toggleGameMode{
-    display:block;
-    margin-right:45px;
+#toggleGameMode button{
+    margin-left:45%;
+}
+#toggleMinimalMode button{
+    margin-left:44%;
+}
+#playerName {
+    visibility: hidden;
+}
+#playerName input{
+    visibility: hidden;
+    z-index: 1;
+}
+#submitName{
+    visibility: hidden;
+    left: 300px;
+    width: 150px;
 }
 /* Button */
 a:link, a:visited{

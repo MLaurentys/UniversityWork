@@ -11,10 +11,10 @@ function mainMenuButtonsAndLabels(){
     startScene.addChild(PIXI.Sprite.fromImage("Images/Backgrounds/Menu/Menu.png"));
     //play button
     let startButton = new PIXI.Text();
-    startButton.x = 102;
-    startButton.y = 623;
-    startButton.width = 204;
-    startButton.height = 83;
+    startButton.x = 94;
+    startButton.y = 560;
+    startButton.width = 167;
+    startButton.height = 64;
     startButton.interactive = true;
     startButton.buttonMode = true;
     startButton.on("pointerup", startGame);
@@ -25,12 +25,19 @@ function mainMenuButtonsAndLabels(){
 //exclusive for game scene
 function gameButtonsAndLabels(){
     //Create Background
-    gameScene.addChild(PIXI.Sprite.fromImage("Images/Backgrounds/Game/GameBackground.png"));
+    gameScene.addChild(PIXI.Sprite.fromImage("Images/Backgrounds/Game/GameBackground.png"));    
+    //create instructions
+    instructions = PIXI.Sprite.fromImage("Images/Backgrounds/Game/Instructions.png");
+    instructions.x = 150;
+    instructions.y = 200;   
+    instructionsActive = true;
+    gameScene.addChild(instructions);
+
     //create Score Label
     scoreLabel = new PIXI.Text("Score: ");
     scoreLabel.style = new PIXI.TextStyle({
         fill: 0xFFFFFF,
-        fontSize: 32,
+        fontSize: 24,
         fontFamily: 'Verdana',
         stroke:0xFF0000,
         strokeThickness:6,
@@ -43,7 +50,7 @@ function gameButtonsAndLabels(){
     localMaxScoreLabel = new PIXI.Text("Local Max Score: ");
     localMaxScoreLabel.style = new PIXI.TextStyle({
         fill: 0xFFFFFF,
-        fontSize: 32,
+        fontSize: 24,
         fontFamily: 'Verdana',
         stroke:0xFF0000,
         strokeThickness:6,
@@ -70,10 +77,25 @@ function endMenuButtonsAndLabels(){
         stroke:0xFF0000,
         strokeThickness:6,
         alpha: 0.8
+        
     })
     gameOverScoreLabel.x = 100;
     gameOverScoreLabel.y = 350;
     gameOverScene.addChild(gameOverScoreLabel);
+    
+    enterHighScore = new PIXI.Text("Please, enter highscore!");
+    enterHighScore.style = new PIXI.TextStyle({
+        fill: 0xFFFFFF,
+        fontSize: 32,
+        fontFamily: 'Verdana',
+        stroke:0xFF0000,
+        strokeThickness:6,
+        alpha: 0.8
+    })
+    enterHighScore.visible = false;
+    enterHighScore.x = 40;
+    enterHighScore.y = 420;
+    gameOverScene.addChild(enterHighScore);
 }
 
 
