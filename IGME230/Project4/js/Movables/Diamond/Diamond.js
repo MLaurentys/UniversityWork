@@ -15,8 +15,8 @@ class Diamond extends PIXI.Sprite{
         this.body.position.x = this.x;
         this.body.position.y = this.y;
 
-        console.log("X: (body: " + this.body.position.x + ") (sprite: " + this.x + ")");
-        console.log("y: (body: " + this.body.position.y + ") (sprite: " + this.y + ")");*/
+        //console.log("X: (body: " + this.body.position.x + ") (sprite: " + this.x + ")");
+        //console.log("y: (body: " + this.body.position.y + ") (sprite: " + this.y + ")");*/
 
         this.body = Matter.Bodies.fromVertices(x - this.width/2, y - this.height/2, [{x: x - 21.6, y: y - 22.4}, {x: x + 21.6, y: this.y - 22.4}, {x: x, y: y + 22.4}]);
         this.body.velocity.y = 2;
@@ -25,7 +25,7 @@ class Diamond extends PIXI.Sprite{
         this.vx = 0;
         this.vy = 0;
         this.maxSpeed = 4; //mas speed == vx^2 + vy^2
-        console.log(this.body.velocity);
+        //console.log(this.body.velocity);
     }
     //AABB collision with player
     collidePlayer(player){
@@ -45,15 +45,13 @@ class Diamond extends PIXI.Sprite{
                     if(this.maxSpeed*Math.cos(Math.PI*1/6) > this.vx){
                         this.vx = Math.cos(Math.PI*1/6)*this.maxSpeed;
                         this.vy = this.maxSpeed - this.vx;
-                        console.log("30");
                     }
                 }
                 //z3 --60 degrees
                 else if(this.x > player.x){
                     if(this.maxSpeed*Math.cos(Math.PI*1/3) > this.vx){
                         this.vx = Math.cos(Math.PI*1/3)*this.maxSpeed;
-                        this.vy = this.maxSpeed - this.vx;
-                        console.log("60");
+                        this.vy = this.maxSpeed - this.vx
                     }
                 }
                 //z2 -- 120 degrees
@@ -61,7 +59,6 @@ class Diamond extends PIXI.Sprite{
                     if(this.maxSpeed*Math.cos(Math.PI*2/3) < this.vx){
                         this.vx = Math.cos(Math.PI*2/3)*this.maxSpeed;
                         this.vy = this.maxSpeed + this.vx;
-                        console.log("120");
                     }
                 }
                 //z1 -- 150 degrees
@@ -69,7 +66,6 @@ class Diamond extends PIXI.Sprite{
                     if(this.maxSpeed*Math.cos(Math.PI*5/6) < this.vx){
                         this.vx = Math.cos(Math.PI*5/6)*this.maxSpeed;
                         this.vy = this.maxSpeed + this.vx;
-                        console.log("150");
                     }
                 }
                 
@@ -99,7 +95,7 @@ class Diamond extends PIXI.Sprite{
         this.x = this.body.position.x;
         this.y = this.body.position.y;
         
-        //console.log(this.body.velocity);
+        ////console.log(this.body.velocity);
     }
     
 

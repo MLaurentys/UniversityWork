@@ -41,7 +41,9 @@ body{
     z-index: 1;
 }
 #submitName{
+    position: absolute;
     visibility: hidden;
+    top:0;
     left: 300px;
     width: 150px;
 }

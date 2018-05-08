@@ -9,14 +9,14 @@ function collideTargets(diamond){
         }
     }
     
-    //console.log(index);
+    ////console.log(index);
     
     //efficiency
     if(diamond.y - diamond.height/2 < targets[index].y+targets[index].height/2){
-        //console.log("aqui");
+        ////console.log("aqui");
         for(; index >= 0; index--){
             if(targets[index]==null){
-                //console.log("deleted");
+                ////console.log("deleted");
                 continue;
             }
             //AABB
@@ -26,7 +26,7 @@ function collideTargets(diamond){
                diamond.x + diamond.width/2 > targets[index].x - targets[index].width/2)
                 {
                     gameScene.removeChild(targets[index]);
-                    //console.log("colided with target");
+                    ////console.log("colided with target");
                     //changes direction
                     if(diamond.x + diamond.width/2 - 5 > targets[index].x-targets[index].width/2 && diamond.x - diamond.width/2 + 5 < targets[index].x + targets[index].width/2)
                         diamond.vy *= -1;

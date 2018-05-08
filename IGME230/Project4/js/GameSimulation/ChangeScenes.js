@@ -20,7 +20,7 @@ function placeTargets(){
     targets = [];
     remainingTargets = 0;
     for(let i = 0; i < Math.floor(3.5*currLevel); i++){
-        console.log("adding");
+        //console.log("adding");
         targets[i] = (new Target(50*(i%11), 40*(Math.floor(i/11))));
         gameScene.addChild(targets[i]);
         remainingTargets++;
@@ -40,7 +40,6 @@ function startGame(){
     updateLocalMaxScore();
     resetPlayerAndDiamond();
     //loadLevel();
-    console.log("ok");
     instructions.visible = true;
     instructionsActive;
 }
@@ -72,10 +71,6 @@ function Restart(){
     for(let tg of targets){
         if(tg != null){
             gameScene.removeChild(tg);
-            console.log("removing");
-        }
-        else{
-            console.log("not"); 
         }
     }
     //hide highscore
