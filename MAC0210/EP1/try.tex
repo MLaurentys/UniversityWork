@@ -1,0 +1,54 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\begin{document}
+$dist = \norm{P - c(t)}$ 
+\\\\
+$
+( (u_1 - (a_x*(1-t)^3 + 3b_x*(1-t)^2*t + 3c_x*(1-t)*t^2 + d_x*t^3))^2 )
+$
+=\\\\
+$
+a_x^2 t^6 - 6 a_x^2 t^5 + 15 a_x^2 t^4 - 20 a_x^2 t^3 + 15 a_x^2 t^2 - 6 a_x^2 t + a_x^2 - 6 a_x b_x t^6 + 30 a_x b_x t^5 - 60 a_x b_x t^4 + 60 a_x b_x t^3 - 30 a_x b_x t^2 + 6 a_x b_x t + 6 a_x c_x t^6 - 24 a_x c_x t^5 + 36 a_x c_x t^4 - 24 a_x c_x t^3 + 6 a_x c_x t^2 - 2 a_x d_x t^6 + 6 a_x d_x t^5 - 6 a_x d_x t^4 + 2 a_x d_x t^3 + 2 a_x t^3 u_1 - 6 a_x t^2 u_1 + 6 a_x t u_1 - 2 a_x u_1 + 9 b_x^2 t^6 - 36 b_x^2 t^5 + 54 b_x^2 t^4 - 36 b_x^2 t^3 + 9 b_x^2 t^2 - 18 b_x c_x t^6 + 54 b_x c_x t^5 - 54 b_x c_x t^4 + 18 b_x c_x t^3 + 6 b_x d_x t^6 - 12 b_x d_x t^5 + 6 b_x d_x t^4 - 6 b_x t^3 u_1 + 12 b_x t^2 u_1 - 6 b_x t u_1 + 9 c_x^2 t^6 - 18 c_x^2 t^5 + 9 c_x^2 t^4 - 6 c_x d_x t^6 + 6 c_x d_x t^5 + 6 c_x t^3 u_1 - 6 c_x t^2 u_1 + d_x^2 t^6 - 2 d_x t^3 u_1 + u_1^2
+$
+\\\\
+$\rightarrow$
+\\
+$
+t^6(a_x^2- 6 a_x b_x + 6 a_x c_x - 2 a_x d_x + 9 b_x^2 - 18 b_x c_x + 6 b_x d_x + 9 c_x^2 - 6 c_x d_x+ d_x^2 )
+$\\
+$t^5(-6 a_x^2 + 30 a_x b_x - 24 a_x c_x + 6 a_x d_x - 36 b_x^2 + 54 b_x c_x- 12 b_x d_x- 18 c_x^2 + 6 c_x d_x)
+$\\
+$t^4(15 a_x^2 - 60 a_x b_x + 36 a_x c_x - 6 a_x d_x + 54 b_x^2 - 54 b_x c_x+ 6 b_x d_x+ 9 c_x^2)
+$\\
+$t^3(- 20 a_x^2  + 60 a_x b_x - 24 a_x c_x + 2 a_x d_x + 2 a_x u_1 - 36 b_x^2 + 18 b_x c_x - 6 b_xu_1+ 6 c_xu_1- 2 d_x u_1)
+$\\
+$t^2(15 a_x^2 - 30 a_x b_x + 6 a_x c_x - 6 a_x u_1 + 9 b_x^2 + 12 b_x u_1- 6 c_x u_1)
+$\\
+$t(- 6 a_x^2+ 6 a_x b_x + 6 a_x u_1- 6 b_x u_1)
+$\\
+$a_x^2 - 2 a_x u_1 + u_1^2
+$
+\\\\
+$( (u_2 - (a_y*(1-t)^3 + 3b_y*(1-t)^2*t + 3c_y*(1-t)*t^2 + d_y*t^3))^2 )$
+=\\\\
+$
+a_y^2 t^6 - 6 a_y^2 t^5 + 15 a_y^2 t^4 - 20 a_y^2 t^3 + 15 a_y^2 t^2 - 6 a_y^2 t + a_y^2 - 6 a_y b_y t^6 + 30 a_y b_y t^5 - 60 a_y b_y t^4 + 60 a_y b_y t^3 - 30 a_y b_y t^2 + 6 a_y b_y t + 6 a_y c_y t^6 - 24 a_y c_y t^5 + 36 a_y c_y t^4 - 24 a_y c_y t^3 + 6 a_y c_y t^2 - 2 a_y d_y t^6 + 6 a_y d_y t^5 - 6 a_y d_y t^4 + 2 a_y d_y t^3 + 2 a_y t^3 u_2 - 6 a_y t^2 u_2 + 6 a_y t u_2 - 2 a_y u_2 + 9 b_y^2 t^6 - 36 b_y^2 t^5 + 54 b_y^2 t^4 - 36 b_y^2 t^3 + 9 b_y^2 t^2 - 18 b_y c_y t^6 + 54 b_y c_y t^5 - 54 b_y c_y t^4 + 18 b_y c_y t^3 + 6 b_y d_y t^6 - 12 b_y d_y t^5 + 6 b_y d_y t^4 - 6 b_y t^3 u_2 + 12 b_y t^2 u_2 - 6 b_y t u_2 + 9 c_y^2 t^6 - 18 c_y^2 t^5 + 9 c_y^2 t^4 - 6 c_y d_y t^6 + 6 c_y d_y t^5 + 6 c_y t^3 u_2 - 6 c_y t^2 u_2 + d_y^2 t^6 - 2 d_y t^3 u_2 + u_2^2
+$
+\\\\
+Para achar minimos, derivar a funcao da distancia e igualar a zero:
+\\
+$
+6t^5(a_x^2- 6 a_x b_x + 6 a_x c_x - 2 a_x d_x + 9 b_x^2 - 18 b_x c_x + 6 b_x d_x + 9 c_x^2 - 6 c_x d_x+ d_x^2 )
+$\\
+$5t^4(-6 a_x^2 + 30 a_x b_x - 24 a_x c_x + 6 a_x d_x - 36 b_x^2 + 54 b_x c_x- 12 b_x d_x- 18 c_x^2 + 6 c_x d_x)
+$\\
+$4t^3(15 a_x^2 - 60 a_x b_x + 36 a_x c_x - 6 a_x d_x + 54 b_x^2 - 54 b_x c_x+ 6 b_x d_x+ 9 c_x^2)
+$\\
+$3t^2(- 20 a_x^2  + 60 a_x b_x - 24 a_x c_x + 2 a_x d_x + 2 a_x u_1 - 36 b_x^2 + 18 b_x c_x - 6 b_xu_1+ 6 c_xu_1- 2 d_x u_1)
+$\\
+$2t(15 a_x^2 - 30 a_x b_x + 6 a_x c_x - 6 a_x u_1 + 9 b_x^2 + 12 b_x u_1- 6 c_x u_1)
+$\\
+$(- 6 a_x^2+ 6 a_x b_x + 6 a_x u_1- 6 b_x u_1)
+$\\
+\end{document}
