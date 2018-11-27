@@ -30,6 +30,7 @@ Scene::Scene(float width, float height){
         temp.dy = temp.ay + hei;
         temp.by = temp.ay + rand()%(vmargin + vrange/2) - vmargin;
         temp.cy = temp.ay - rand()%(vmargin + vrange/2) + vmargin;
+        //curveBase temp = {50,20,100,20,120,110,80,80};
 
 
         curvesPoints.push_back(temp);
@@ -95,21 +96,25 @@ std::tuple<float, sf::Vector2f> Scene::getMinRoot(const Curve& curve, const sf::
 
     gsl_poly_complex_solve (coefs, 6, space, roots);
     float minDist = std::numeric_limits<float>::infinity();
-    
+    for(int i = 0; i < 5; ++i){
+        printf("Rizes\nx = %f  %fi\n", roots[2*i], roots[2*i+1]);
+    }
     sf::Vector2f t;
     for(int i = 0; i < 5; ++i)
     {
-        if(roots[2*i + 1] == 0){
-            //printf("Root = %f %fi\n", roots[2*i], roots[2*i + 1]);
-            float term1 = (1-roots[2*i]);
-            float term2 = roots[2*i];
-            sf::Vector2f func = {A.x*term1*term1*term1 + 3*B.x*term1*term1*term2 + 3*C.x*term1*term2*term2 + D.x*term2*term2*term2,
-                                 A.y*term1*term1*term1 + 3*B.y*term1*term1*term2 + 3*C.y*term1*term2*term2 + D.y*term2*term2*term2};
-            sf::Vector2f aux = (mouse - func);
-            float dist = aux.x*aux.x + aux.y*aux.y;
-            if(dist < minDist){
-                t = func;
-                minDist = dist;
+        if(roots[2*i + 1] < 0.00001f){
+            if(0.0f < roots[2*i] && roots[2*i] < 1.0f){
+                //printf("Root = %f %fi\n", roots[2*i], roots[2*i + 1]);
+                float term1 = (1-roots[2*i]);
+                float term2 = roots[2*i];
+                sf::Vector2f func = {A.x*term1*term1*term1 + 3*B.x*term1*term1*term2 + 3*C.x*term1*term2*term2 + D.x*term2*term2*term2,
+                                    A.y*term1*term1*term1 + 3*B.y*term1*term1*term2 + 3*C.y*term1*term2*term2 + D.y*term2*term2*term2};
+                sf::Vector2f aux = (mouse - func);
+                float dist = aux.x*aux.x + aux.y*aux.y;
+                if(dist < minDist){
+                    t = func;
+                    minDist = dist;
+                }
             }
         }
     }
@@ -124,7 +129,7 @@ sf::Vector2f Scene::getClosest(const sf::Vector2f& mouseClick){
     float minimumDist = std::numeric_limits<float>::infinity();
     printf("Mouse Click: (%f, %f)\n", mouseClick.x, mouseClick.y);
     sf::Vector2f closestRoot;
-
+    
     for(int i = 0; i < curves.size(); ++i){
         //calculate distance between curve and point
         // min( derivative(f(x, y, t) = (x, y) - c(t)) ) 
