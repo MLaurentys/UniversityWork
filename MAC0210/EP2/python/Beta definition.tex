@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\begin{document}
+Beta has to be the spline formed by four polynomials that respects the following rules:\\
+$P_0(2) = 0$ -(1)\\
+$P_0'(2) = 0$ -(2)\\
+$P_0''(2) = 0$ -(3)\\
+$P_1(0) = 1$ -(4)\\
+$P_1'(0) = 0$ -(5)\\
+$P_1(1) = P_0(1)$ -(6)\\
+$P_1'(1) = P_0'(1)$ -(7)\\
+$P_1''(1) = P_0''(1)$ -(8)\\
+And symetric:\\
+$P_3 = - P_0$ -(9)\\
+$P_2 = - P_1$ -(10)\\
+\\
+All polynomials $P_i = a_i*t^3 + b_i*t^2 + c_i*t + d_i$\\
+Given (1), (2) and (3), $P_0 = (2-t)^3*a_0$
+Given 4, $d_1 = 1$\\
+Given 5, $c_1 = 0$\\
+Given 6, 7 and 8:\\
+$
+\begin{cases} 
+	a_1*1^3 + b_1*1^2 + 1 = (2-1)^3*a_0 \\ 
+	3*a_1*1^2 + 2*b_1*1 = -3*(2-1)^2*a_0\\ 
+	6*a_1*1 + 2*b_1 = 6*(2-1)*a_0 \end{cases}
+$\\
+$
+\begin{cases} 
+	a_1 + b_1 - a_0 = -1 \\ 
+	3*a_1 + 2*b_1 + 3*a_0 = 0\\ 
+	6*a_1 + 2*b_1 - 6*a_0  = 0\end{cases}
+$\\
+$a_1 = 3/4$\\
+$b_1 = -3/2$\\
+$a_0 = 1/4$\\
+Given (9),\\
+$P_0 = (2-t)^3*1/4$\\
+$P_3 = (2+t)^3	*1/4$\\
+Given (10),\\
+$P_1 = 3t^3/4 - 3t^2/2 + 1$\\
+$P_2 = -3t^3/4 - 3t^2/2 + 1$\\
+Also needed:\\
+$P_1'' = 9t/2 - 3$\\
+$P_0'' = 3(2-t)/2$\\
+\end{document}
