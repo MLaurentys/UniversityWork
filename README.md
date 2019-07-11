@@ -4,6 +4,6 @@ Contains all work done for classes. This includes all from small homeworks to la
 Timeline:
 <pre>
     2016              2017              2018              2019
- -----|--------|--------|--------|--------|--------|--------|
-         USP      RIT      RIT       USP      RIT
+ -----|--------|--------|--------|--------|--------|--------|--------|
+         USP      RIT      RIT       USP      RIT      USP      USP
  </pre>
