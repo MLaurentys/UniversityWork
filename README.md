@@ -54,3 +54,22 @@ Timeline:
 - Mathematical Graphical Simulation II
 - Introduction to International Relations
 
+## Sixth Semester
+#### USP
+- Laboratory of Numerical Methods
+- Fundamental Concepts in Programming Languages
+- Operating Systems
+- Geology
+- Rings and Fields
+- Non-linear Programming
+- University Sports Program: from theory to practice I
+
+## Seventh Semester
+#### USP
+- Portuguese Language
+- Paths in the Bachelor of Computer Science
+- Modeling and Simulation
+- Algorithms and Data Structures II
+- Introduction to Graph Theory
+- Probability I
+- Differentiable functions and series
