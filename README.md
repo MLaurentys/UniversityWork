@@ -1,7 +1,6 @@
 # UniversityWork - WIP
 
 This repository works as an index to my college classes. As I am completing two bachelors, intercalating them, this helps finding what you look for. All my college work is accessible from here. 
-- At times I took an online class at RIT while in Brazil due to VISA requirements.
 
 Timeline:
 <pre>
