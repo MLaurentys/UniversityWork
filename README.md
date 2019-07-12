@@ -2,6 +2,7 @@
 
 This repository works as an index to my college classes. As I am completing two bachelors, intercalating them, this helps finding what you look for. All my college work is accessible from here. 
  * Click on the <img src="images/linkIcon/link-symbol.png" width="32" height="32"> icon to go respective repositories.
+ 
 Timeline:
 <pre>
     2016              2017              2018              2019
