@@ -1,0 +1,5 @@
+./Window.h
+./Curve.h
+./Text.h
+./Scene.h
+./Renderer.h

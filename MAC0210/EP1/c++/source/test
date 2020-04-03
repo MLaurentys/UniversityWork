@@ -1,0 +1,30 @@
+#!/bin/bash
+allCFiles=$(ls *.cpp)
+allHFiles=$(ls *.h)
+linesCount=0
+intCount=0
+if [[ $1 == "a" ]]
+	then
+		for name in ${allCFiles[@]}
+		do
+			lines=$(wc -l < $name)
+			linesCount=$(($linesCount + $lines))
+		done
+
+		for name in ${allHFiles[@]}
+		do
+			lines=$(wc -l < $name)
+			linesCount=$(($linesCount + $lines))
+			echo $lines
+		done
+
+		echo $linesCount
+	else
+		for name in ${allCFiles[@]}
+		do
+			lines=$(wc -l < $name)
+			linesCount=$(($linesCount + $lines))
+			echo $lines
+		done
+fi
+

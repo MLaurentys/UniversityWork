@@ -6,11 +6,11 @@ import random
 SAMPLE_SIZE = 1000
 SAMPLE_STARTING_POINT = (0, 30)
 STEP = 0.5
-SMOOTH = 0.4
-SPLINES_AMT = 106
-POINTS_RANGE = SPLINES_AMT - 6
+SMOOTH = 3
+SPLINES_AMT = 8
+SAMPLE_X_RANGE = SPLINES_AMT - 6
 B_SPLINE_PRECISION = 0.1
-SMOOTHNESS_WEIGHT = 0
+SMOOTHNESS_WEIGHT = 0.001
 
 class Spline:
     def beta(self, t):
@@ -38,52 +38,64 @@ class Spline:
     def integ_expr(self, t, k, i):
         return self.beta_2_dirivative(t-k) * self.beta_2_dirivative(t - i) * 2
 
-class B_Spline:
-    def getSplineValue(self, t):
-        ind = int(t)
-        d = t - ind
-        if(d < 0 or d > 1 or d > 99):
-            print("erro no t")
-        retVal = 0
-        if ind >= 0:
-            for i in range (4):
-                if(ind + i < SPLINES_AMT):
-                    retVal += self.coef[ind + i] * self.s.beta(d - 2 + i)
-                else:
-                    break
-        return  retVal
+    def __init__(self):
+        self.x = []
+        self.y = []
+        for i in range(-50, 50):
+            self.x.append(i/25)
+            self.y.append(self.beta(i/25))
 
+class B_Spline:
     # def getSplineValue(self, t):
     #     ind = int(t)
-    #     d = ind - t
+    #     d = t - ind
+    #     if(d < 0 or d > 1):
+    #         print("erro no t")
     #     retVal = 0
     #     if ind >= 0:
     #         for i in range (4):
     #             if(ind + i < SPLINES_AMT):
-    #                 retVal += self.coef[ind + i] * self.s.beta(d - 1 + i)
+    #                 retVal += self.coef[ind + i] * self.s.beta(d - 2 + i)
     #             else:
     #                 break
-    #    return  retVal
+    #     return  retVal
+
+    def getSplineValue(self, t):
+        ind = int(t)
+        d = ind - t
+        retVal = 0
+        if ind >= 0:
+            for i in range (4):
+                if(ind + i < SPLINES_AMT):
+                    retVal += self.coef[ind + i] * self.s.beta(d - 1 + i)
+                else:
+                    break
+        return  retVal
 
     def calculateBSpline(self):
         curve = []
         i = SAMPLE_STARTING_POINT[0]
-        while(i <= POINTS_RANGE):
+        while(i <= SAMPLE_X_RANGE):
             curve.append((i, self.getSplineValue(i)))
             i += B_SPLINE_PRECISION        
         return curve
 
     def calculateCoeficients(self, points):
         self.b_matrix = np.zeros((SAMPLE_SIZE, SPLINES_AMT))
-        for i in range(len(self.b_matrix)):
-            for j in range(len(self.b_matrix[0])):
+        for i in range(SAMPLE_SIZE):
+            for j in range(SPLINES_AMT):
                 self.b_matrix[i][j] = self.s.beta((points[i][0]) - j)
-            print("i = " + str(i) + str(self.b_matrix[i]))
+            #print("i = " + str(i) + str(self.b_matrix[i]))
 
         self.mlk_matrix = np.zeros((SPLINES_AMT, SPLINES_AMT))
-        for i in range (len(self.mlk_matrix)):
-            for j in range (len(self.mlk_matrix)):
-                self.mlk_matrix[i][j] = integrate.quad(self.s.integ_expr, 0, POINTS_RANGE, args=(j, i ), limit=SAMPLE_SIZE)[0]
+        for i in range (SPLINES_AMT):
+            for j in range (SPLINES_AMT):
+                self.mlk_matrix[i][j] = integrate.quad(self.s.integ_expr, 0, SPLINES_AMT, args=(j, i ), limit=SAMPLE_SIZE)[0]
+            print(self.mlk_matrix[i])
+
+        # for i in range (SPLINES_AMT):
+        #     for j in range (SPLINES_AMT):
+        #         self.mlk_matrix[i][j] = 4 - abs(i - j) 
         y_spline = [0]*SAMPLE_SIZE
         for i in range (SAMPLE_SIZE):
             y_spline[i] = points[i][1]
@@ -121,10 +133,9 @@ def generateSample():
         y += random.uniform(-SMOOTH,SMOOTH)
 
     max_x = xVals[SAMPLE_SIZE-1]
-    factor = max_x / (POINTS_RANGE)
+    factor = max_x / SAMPLE_X_RANGE
     for i in range (SAMPLE_SIZE):
         points[i] = (xVals[i]/factor, yVals[i])
-
     return points
 
 def createWindow():
@@ -137,9 +148,12 @@ def createWindow():
     x = []
     y = []
     for pt in bs.b_s:
-        x.append(pt[0])
-        y.append(pt[1])
+        if(pt[0] < 99):
+            x.append(pt[0] + 1) 
+            y.append(pt[1])
     plt.plot(x, y)
+    for i in range(-3, SPLINES_AMT - 3):
+        plt.plot(np.asarray(bs.s.x) + i, bs.coef[i] * np.array(bs.s.y))
 
 def main():
     random.seed()
